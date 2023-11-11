@@ -303,34 +303,20 @@ function buscaMapa(nombreProvincia) {
 }
 
 function agregarAInforme() {
-  let nuevaCadenaValores = `{periodosSelect}, {valorTipoEleccion}, {valorCargo}, {valorDistrito}, {valorSeccion}, {valorSvg}, {valorCantidadElectores}, {valorMesasTotalizadas}, {valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
-  const listaInforme = []
-  if (cadenaNuevaLsita. )
-  const LISTA_A_AGREGAR_JSON = JSON.stringify(cadenaLsita) //?combierte la lista en una cadena.
-  localStorage.setItem(`INFORMES`, LISTA_A_AGREGAR_JSON)//?guarda la lista/cadena en la key INFORMES
-//borre la cadena cadena porque ya tengo una
-//!!Coreegir lo de aabajo
-  let informes = [];
+  let nuevaCadenaValores = `${periodosSelect}, ${valorTipoEleccion}, ${valorCargo}, ${valorDistrito}, ${valorSeccion}, ${valorSvg}, ${valorCantidadElectores}, ${valorMesasTotalizadas}, ${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
+  let listaInforme = []
 
-  if (localStorage.getItem('INFORMES')) {
-      informes = JSON.parse(localStorage.getItem('INFORMES'));
+  if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor para la key, entonces no entra en el if.
+    listaInforme = JSON.parse(localStorage.getItem('INFORMES'));//? Si key tiene algo, se guarda en informes lo que hay dentro de INFORMES. El parse si no me equivoco lo hace obj
   }
 
-  
-
-  if (informes.includes(nuevoInforme)) {
-      mostrarMensaje(mensajeAmarillo, "El informe ya se encuentra añadido.");
+  if (listaInforme.includes(nuevaCadenaValores)) { //?retorna true si el array contiene el elemento especificado y false si no lo contiene.
+      mostrarMensaje($msjAmarilloAdver, "El informe ya se encuentra añadido.");
   } else {
-      informes.push(nuevoInforme);
-      localStorage.setItem('INFORMES', JSON.stringify(informes));
-      mostrarMensaje(mensajeVerde, "Informe agregado con éxito");
+    listaInforme.push(nuevaCadenaValores);
+      localStorage.setItem('INFORMES', JSON.stringify(listaInforme));
+      mostrarMensaje($msjVerdeExito, "Informe agregado con exito");
   }
-}
-
-
-
-
-
 }
 // fetch(periodosURL)
 //   .then((res) => res.json())
@@ -423,7 +409,7 @@ function agregarAInforme() {
 //     });
 //   });
 
-function mostrarMensaje(msj, cadena, tiempo = 4000) {
+function mostrarMensaje(msj, cadena, tiempo = 6000) {
   msj.querySelector(`.mensaje`).textContent = cadena;
   msj.classList.remove("escondido");
   setTimeout(() => {
