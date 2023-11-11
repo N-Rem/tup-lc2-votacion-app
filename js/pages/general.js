@@ -21,7 +21,7 @@ const $btnAgregarInforme = document.querySelector("#agregar-informe")
 const $spiner = document.querySelector("#spiner")
 
 
-//!!span para cambiar con el filtro.
+//*span a cambiar con filtro().
 const $spanMesasComputadas = document.getElementById("mesas-computadas-porsen")
 const $spanElectores = document.getElementById("electores")
 const $spanSobreRecuento = document.getElementById("sobre-recuento")
@@ -30,13 +30,13 @@ const $spanMapaSvg = document.querySelector("#svg-mapa")
 
 const ELECCION_JSON = {} //? se gusra el json en una variable gloval
 
-//!Guardamos los datos a medida que se van filtrando en estas Variables
+//*Guardamos los datos a medida que se van filtrando en estas Variables
 let periodosSelect = "" //? año seleciconad
 let cargoSelect = "" //? ID de cargo para ir filtrando
 let distritoSelect = "" //? ID de distrito para ir filtrando
 let seccionSeleccionadaID = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
-const tipoEleccion = 1; //? tipo 1 eleccion PASOS
+const tipoEleccion = 2; //? tipo 2 eleccion GENERALES
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
@@ -55,30 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
   $botonFiltrar.addEventListener('click', filtrar);
   $btnAgregarInforme.addEventListener("click", agregarAInforme);
 });
-
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
-$selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
-$selectCargo.addEventListener('change', seleccionDistrito); //cuando el <select> cambie se llama a la siguiente fun
-$selectDistrito.addEventListener('change', seleccionSeccionProv); //cuando el <select> cambie se llama a la siguiente fun
-$seccionSelect.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
+$selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la fun
+$selectCargo.addEventListener('change', seleccionDistrito); 
+$selectDistrito.addEventListener('change', seleccionSeccionProv); 
+$seccionSelect.addEventListener('change', seleccionCargo);
 $seccionSelect.addEventListener('change', () => {
   let opcionSeleccionada = $seccionSelect.options[$seccionSelect.selectedIndex];
   valorSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
 });
 
 //*-------------end--------------
-//!! ----------AÑO CON FUNCION ASYNC--------------
+// ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
-
   try {
     mostrarSpiner()
     console.log(" ----INICIA el TRY ASYNC DE seleccionAnio---- ")
-    resetFiltro()//!deberia reiniciar el filtro
+    resetFiltro()//?deberia reiniciar el filtro
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
 
     if (respuesta.ok) {
       ocultarSpiner()
-      borrarTodosLosHijos() //!Deberia borrar todos los hijos de los select
+      borrarTodosLosHijos() //?Deberia borrar todos los hijos de los select
 
       const anios = await respuesta.json();
       console.log("----Json, Año para Cargo----")
@@ -98,15 +96,15 @@ async function seleccionAnio() {
     console.log(" ----FINALIZA el TRY ASYNC DE seleccionAnio---- ")
 
   }
-  catch (error) {  //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    ocultarSpiner()
+  catch (error) {  //?Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+    // ocultarSpiner()
     mostrarErrorCatch(error)
   }
 }
 
-//!! ------------CARGO CON FUN ASYNC-----------
+// ------------CARGO-----------
 async function seleccionCargo() {
-  periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
+  periodosSelect = $selectAnio.value //?Ya se selecciona para el filtro final..
   try {
     mostrarSpiner()
     console.log(" ----INICIA el TRY ASYNC DE seleccionCargo---- ")
@@ -115,7 +113,7 @@ async function seleccionCargo() {
     if (respuesta.ok) {
       ocultarSpiner()
       borrarTodosLosHijos()
-      ELECCION_JSON = await respuesta.json(); //!! Se agrega a la constante global
+      ELECCION_JSON = await respuesta.json(); //! Se agrega a la constante global<----------------------
       console.log("----Json, año para elecciones----")
       console.log(ELECCION_JSON)
 
@@ -136,16 +134,16 @@ async function seleccionCargo() {
     }
     console.log(" ----FINALIZA el TRY de ASYNC DE seleccionCargo---- ")
   }
-  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+  catch (error) {
     ocultarSpiner()
     mostrarErrorCatch(error)
   }
 }
 
-//!!-------------Distrito con fun---------------------
+//-------------Distrito con fun---------------------
 function seleccionDistrito() {
   console.log(" ----INICIA el FUN DE seleccionDistrito---- ")
-  cargoSelect = $selectCargo.value //!se guarda el cargo elegido anteriormente
+  cargoSelect = $selectCargo.value //?se guarda el cargo elegido anteriormente
   borrarHijos($selectDistrito)
   borrarHijos($seccionSelect)
   ELECCION_JSON.forEach((eleccion) => {
@@ -170,7 +168,7 @@ function seleccionDistrito() {
   console.log(" ----FINALIZA la FUN DE seleccionDistrito---- ")
 }
 
-//!!-------------Seccion Provincial con fun---------------
+//-------------Seccion Provincial con fun---------------
 function seleccionSeccionProv() {
   console.log(" ----INICIA LA FUN de seleccionSeccionProv---- ")
   distritoSelect = $selectDistrito.value
@@ -188,7 +186,7 @@ function seleccionSeccionProv() {
 
               distrito.SeccionesProvinciales.forEach((seccionProv) => {
                 idSeccionProv = seccionProv.IDSeccionProvincial;
-                $inputSeccionProvincial.value = idSeccionProv; //! agrega el valor al input oculto
+                $inputSeccionProvincial.value = idSeccionProv; //? agrega el valor al input oculto
                 seccionProv.Secciones.forEach((seccion) => {
                   console.log("----Json Selecciones Provinciales para Secciones----")
                   console.log(seccion)
@@ -208,7 +206,7 @@ function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-//!!-----------Fun Filtrar-------------
+//!!-----------Filtrar-------------
 async function filtrar() {
   idSeccionProv = $seccionSelect.value
   seccionSeleccionadaID = $inputSeccionProvincial.value
@@ -262,7 +260,6 @@ async function filtrar() {
     ocultarSpiner()
     mostrarErrorCatch(error)
     $tituloSubTitulo.classList.remove("escondido");
-
   }
 }
 
@@ -271,6 +268,7 @@ function buscaMapa(nombreProvincia) {
   return ProvEncontrado.svg
 }
 
+//!!------------Agragar Comentarios----------
 function agregarAInforme() {
   let nuevaCadenaValores = `${periodosSelect}, ${valorTipoEleccion}, ${valorCargo}, ${valorDistrito}, ${valorSeccion}, ${valorSvg}, ${valorCantidadElectores}, ${valorMesasTotalizadas}, ${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
@@ -303,7 +301,7 @@ function mostrarErrorCatch(error) {
 }
 
 function mostrarTodo() {
-  $tituloSubTitulo.classList.remove("escondido"); //!SE hace vicible el contendio de la pagina
+  $tituloSubTitulo.classList.remove("escondido"); //?Se hace vicible el contendio de la pagina
   $contenido.classList.remove("escondido");
   $cuadros.classList.remove("escondido");
 }
@@ -314,7 +312,6 @@ function borrarHijos(padre) {
     padre.remove(1)
   }
 }
-
 function borrarTodosLosHijos() {
   borrarHijos($selectCargo)
   borrarHijos($selectDistrito)
@@ -348,5 +345,4 @@ function ocultarSpiner(tiempo = 3000) {
       $spiner.classList.add("escondido")
     }), { once: true }
   }, tiempo)
-
 }
