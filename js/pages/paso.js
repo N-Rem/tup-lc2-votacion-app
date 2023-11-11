@@ -242,7 +242,6 @@ async function filtrar() {
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-
   let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
   let url = getResultados + parametros
   console.log(url);
@@ -266,12 +265,16 @@ async function filtrar() {
       valorParticipacionPorcentaje = filtrado.estadoRecuento.participacionPorcentaje
       valorSvg = buscaMapa(valorDistrito)
 
-      //?--Agrega valores al html
+      //?--Agrega valores a la: <section id="sec-contenido"
       $spanElectores.textContent = valorCantidadElectores
       $spanMesasComputadas.textContent = valorMesasTotalizadas
       $spanSobreRecuento.textContent = valorParticipacionPorcentaje
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
       //!agregar cuadro de agrup poli y Resumen de votos ---2 cosas---
+      //?--Agrega valores a la: <section id="cuadros"
+
+
+
       mostrarTodo()
     }
     else {
@@ -310,7 +313,7 @@ function agregarAInforme() {
   }
 }
 
-function mostrarMensaje(msj, cadena, tiempo = 6000) {
+function mostrarMensaje(msj, cadena, tiempo = 4000) {
   msj.querySelector(`.mensaje`).textContent = cadena;
   msj.classList.remove("escondido");
   setTimeout(() => {
@@ -362,7 +365,7 @@ function mostrarSpiner() {
   $spiner.classList.remove("escondido")
   $spiner.style.opacity = "1";
 }
-function ocultarSpiner(tiempo = 3000) {
+function ocultarSpiner(tiempo = 2000) {
   setTimeout(() => {
     $spiner.style.opacity = "0";
     $spiner.addEventListener("transitionend", () => {
@@ -371,6 +374,11 @@ function ocultarSpiner(tiempo = 3000) {
   }, tiempo)
 }
 
+//*--Parte dos --- 
+
+function agregaCuadrosAgrupaciones(){
+  return 0; //dx
+}
 
 
 
