@@ -46,11 +46,11 @@ let valorParticipacionPorcentaje = ""
 
 reconoceTipoElecion()
 //*---------------Start-----------------------
-
-
 document.addEventListener('DOMContentLoaded', () => {
   mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
-
+  
+  $botonFiltrar.addEventListener('click', filtrar);
+  $btnAgregarInforme.addEventListener("click", agregarAInforme);
 });
 
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
@@ -62,11 +62,6 @@ $seccionSelect.addEventListener('change', () => {
   let opcionSeleccionada = $seccionSelect.options[$seccionSelect.selectedIndex];
   valorSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
 });
-
-$botonFiltrar.addEventListener('click', filtrar);
-$btnAgregarInforme.addEventListener("click", agregarAInforme);
-
-
 
 //*-------------end--------------
 //!! ----------AÑO CON FUNCION ASYNC--------------
@@ -149,10 +144,10 @@ async function seleccionDistrito() {
   try {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
-      
+
 
       const elecciones = await respuesta.json();
- borrarHijos($selectDistrito)
+      borrarHijos($selectDistrito)
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
@@ -310,11 +305,11 @@ function agregarAInforme() {
   }
 
   if (listaInforme.includes(nuevaCadenaValores)) { //?retorna true si el array contiene el elemento especificado y false si no lo contiene.
-      mostrarMensaje($msjAmarilloAdver, "El informe ya se encuentra añadido.");
+    mostrarMensaje($msjAmarilloAdver, "El informe ya se encuentra añadido.");
   } else {
     listaInforme.push(nuevaCadenaValores);
-      localStorage.setItem('INFORMES', JSON.stringify(listaInforme));
-      mostrarMensaje($msjVerdeExito, "Informe agregado con exito");
+    localStorage.setItem('INFORMES', JSON.stringify(listaInforme));
+    mostrarMensaje($msjVerdeExito, "Informe agregado con exito");
   }
 }
 // fetch(periodosURL)

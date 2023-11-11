@@ -47,7 +47,10 @@ let valorParticipacionPorcentaje = ""
 reconoceTipoElecion()
 //*---------------Start-----------------------
 document.addEventListener('DOMContentLoaded', () => {
-  mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
+  mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 70000)
+  
+$botonFiltrar.addEventListener('click', filtrar);
+$btnAgregarInforme.addEventListener('click', agregarAInforme);
 });
 
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
@@ -60,8 +63,6 @@ $seccionSelect.addEventListener('change', () => {
   valorSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
 });
 
-$botonFiltrar.addEventListener('click', filtrar);
-$btnAgregarInforme.addEventListener("click", agregarAInforme);
 
 
 
@@ -318,7 +319,7 @@ function agregarAInforme() {
 
 
 function mostrarMensaje(msj, cadena, tiempo = 6000) {
-  msj.querySelector(`.mensaje`).textContent = cadena;
+  msj.querySelector('.mensaje').textContent = cadena;
   msj.classList.remove("escondido");
   setTimeout(() => {
     msj.classList.add("escondido");
@@ -331,12 +332,12 @@ function borrarHijos(padre) {
     padre.remove(1)
   }
 }
-
 function borrarTodosLosHijos() {
   borrarHijos($selectCargo)
   borrarHijos($selectDistrito)
   borrarHijos($seccionSelect)
 }
+
 function resetFiltro() {
   periodosSelect = ""
   cargoSelect = ""
@@ -344,7 +345,6 @@ function resetFiltro() {
   seccionSeleccionadaID = ""
   idSeccionProv = ""
 }
-
 
 function reconoceTipoElecion() {
   if (tipoEleccion === 1) {
