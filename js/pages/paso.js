@@ -28,7 +28,8 @@ const $spanSobreRecuento = document.getElementById("sobre-recuento")
 
 const $spanMapaSvg = document.querySelector("#svg-mapa")
 
-const ELECCION_JSON = {} //? se gusra el json en una variable gloval
+let eleccion_JSON = {} //? se gusra el json en una variable gloval
+let filtrado_JSON = {}
 
 //*Guardamos los datos a medida que se van filtrando en estas Variables
 let periodosSelect = "" //? año seleciconad
@@ -137,11 +138,11 @@ async function seleccionCargo() {
     if (respuesta.ok) {
       ocultarSpiner()
       borrarTodosLosHijos()
-      ELECCION_JSON = await respuesta.json(); //! Se agrega a la constante global<----------------------
+      eleccion_JSON = await respuesta.json(); //! Se agrega a la constante global<----------------------
       console.log("----Json, año para elecciones----")
-      console.log(ELECCION_JSON)
+      console.log(eleccion_JSON)
 
-      ELECCION_JSON.forEach((eleccion) => {
+      eleccion_JSON.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //?se recorre todo el json()
             const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
@@ -170,7 +171,7 @@ function seleccionDistrito() {
   cargoSelect = $selectCargo.value //?se guarda el cargo elegido anteriormente
   borrarHijos($selectDistrito)
   borrarHijos($seccionSelect)
-  ELECCION_JSON.forEach((eleccion) => {
+  eleccion_JSON.forEach((eleccion) => {
     if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
       eleccion.Cargos.forEach((cargo) => { //se recorre el array de cargos
         if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
@@ -198,7 +199,7 @@ function seleccionSeccionProv() {
   distritoSelect = $selectDistrito.value
   borrarHijos($seccionSelect)
 
-  ELECCION_JSON.forEach((eleccion) => {
+  eleccion_JSON.forEach((eleccion) => {
     if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
       eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
         if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
@@ -242,16 +243,18 @@ async function filtrar() {
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-  let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
+  let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
   let url = getResultados + parametros
   console.log(url);
+  let p = `ANIO ${periodosSelect} - TIPO RECUENTO ${tipoRecuento} - TIPO ELECCION ${tipoEleccion}CARGO ${cargoSelect} DISTRITO ${distritoSelect} SEC PROV${seccionSeleccionadaID} idSECCION PROV ${idSeccionProv} - VACIO ${idCircuito} - VACIO ${IdMesa}`
+  console.log(p)
   try {
     mostrarSpiner()
     const respuesta = await fetch(url)
     if (respuesta.ok) {
-      ocultarSpiner()
-      const filtrado = await respuesta.json()
-      console.log(filtrado);
+      ocultarSpiner(200)
+      filtrado_JSON = await respuesta.json()
+      console.log(filtrado_JSON);
       mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
 
       //?se agrega titulo y subtitulo--
@@ -260,9 +263,9 @@ async function filtrar() {
       $tituloSubTitulo.querySelector("p").textContent = subTitulo
 
       //?--Guardado en variables globales
-      valorCantidadElectores = filtrado.estadoRecuento.cantidadElectores
-      valorMesasTotalizadas = filtrado.estadoRecuento.mesasTotalizadas
-      valorParticipacionPorcentaje = filtrado.estadoRecuento.participacionPorcentaje
+      valorCantidadElectores = filtrado_JSON.estadoRecuento.cantidadElectores
+      valorMesasTotalizadas = filtrado_JSON.estadoRecuento.mesasTotalizadas
+      valorParticipacionPorcentaje = filtrado_JSON.estadoRecuento.participacionPorcentaje
       valorSvg = buscaMapa(valorDistrito)
 
       //?--Agrega valores a la: <section id="sec-contenido"
@@ -365,7 +368,7 @@ function mostrarSpiner() {
   $spiner.classList.remove("escondido")
   $spiner.style.opacity = "1";
 }
-function ocultarSpiner(tiempo = 2000) {
+function ocultarSpiner(tiempo = 1000) {
   setTimeout(() => {
     $spiner.style.opacity = "0";
     $spiner.addEventListener("transitionend", () => {

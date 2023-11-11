@@ -7,10 +7,23 @@ const $seccionContenido = document.querySelector("#sec-contenido");
 
 //?valores del localStorage()
 let valorSvgMapa = ""
-let valorTitulo =""
-let valorAnio =""
-let valorTipoEleccion =""
-let valor
+let valorTitulo = ""
+let valorAnio = ""
+let valorTipoEleccion = ""
+let valorCago =""
+let valorDistrito=""
+let valorSeccion=""
+let mesasEscrutadas = ""
+let electorales = ""
+let participacion = ""
+
+//!!porIndice
+let valorPartido=""
+let valorVotosPorcentaje = ""
+let valroVotosDePartidos=""
+//! o como objeto. o puedo usar a los dos con un foreach()
+let partidos = [{nombre: "nomb del partido", porcentaje: "25%", votosDePartidos: "2000"},{}]
+
 
 //-------Secion Targejta------
 //Mapa-porvicioa-svg = svg-Mapa
@@ -22,22 +35,22 @@ let valor
 $seccionContenido.classList.add("escondido")
 mostrarSpiner()
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem("INFORMES") === null ){
+    if (localStorage.getItem("INFORMES") === null) {
         ocultarSpiner(200)
         console.log("no hay nada guardado en le localStorage")
         mostrarMensaje($msjAmarilloAdver, `Debe AGREGAR INFORMES en Pasos o Generales`)
-    }else{
+    } else {
         console.log(`Hay algo guardado en el localStorage.\n${localStorage.getItem(INFORMES)}`)
         //!! Deberia agregar una fucnion que valla creando las targentas con la info del localStroage()
-    
+
     }
-  });
+});
 
 
 
 
-function reconoceTipoElecion() {
-    if (tipoEleccion === 1) {
+function reconoceTipoElecion(tipo) {
+    if (tipoEleccion === tipo) {
         valorTipoEleccion = "Pasos"
     }
     else {
@@ -66,14 +79,4 @@ function mostrarMensaje(msj, cadena, tiempo = 4000) {
     }, tiempo);
 }
 
-function reconoceTipoElecion() {
-    if (tipoEleccion === 1) {
-      valorTipoEleccion = "Pasos"
-    }
-    else {
-      valorTipoEleccion = "Generales"
-    }
-  }
 
-
-  
