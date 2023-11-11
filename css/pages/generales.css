@@ -341,6 +341,7 @@ svg{
 .cuadro-Mapa {
   display: flex; 
   flex-direction: column; 
+  overflow: hidden;
 }
 .cuadro-Mapa p{
   justify-content: center;

@@ -34,7 +34,7 @@
 --mensaje-usuario-rojo: #dc3545;
 }
 
-.escondido{ /* clase que esconde divs*/
+ .escondido{  /*clase que esconde divs */
   display: none; 
   visibility: hidden;
   position: absolute;
@@ -114,6 +114,9 @@ a{
   overflow: hidden;
 }
 
+#svg-mapa svg{
+  transform: scale(2);
+}
 .barra-menu ul{
   display: flex;
   flex-direction: row; 
@@ -132,7 +135,6 @@ footer{
   height: 100%;
 }
 footer{
-
   height: auto;
   box-sizing:content-box;
   flex: 1;
@@ -181,7 +183,6 @@ footer img{
 
 ul,ol{
   list-style-type: none;
-  /* padding: 0; */
 }
 
 #btn-generales{
