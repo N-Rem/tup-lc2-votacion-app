@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
 
 });
-mostrarMensaje($msjAmarilloAdver, "HOlas buenas tardes señores")
 
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
 $selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
