@@ -47,6 +47,30 @@ let valorCantidadElectores = ""
 let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
 
+//---------------Colores---------------
+//? getComputedStyle = devuelve los estilos/style que el navegador ha calculado COMO OBJETO
+//? (document.docunetElement) = selecciona <html> 
+//? getPropretyValue()= toma como argumento el nombre de la propiedad CSS de la cual deseas obtener el valor.
+//? cada representa un color = #ee3d8f
+const colorPleno = [
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris')
+]
+const colorLiviano = [
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro'),
+  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro')
+]
+
 reconoceTipoElecion()
 //*---------------Start-----------------------
 document.addEventListener('DOMContentLoaded', () => {
@@ -347,29 +371,6 @@ function ocultarSpiner(tiempo = 3000) {
   }, tiempo)
 }
 
-//---------------Colores---------------
-//? getComputedStyle = devuelve los estilos/style que el navegador ha calculado COMO OBJETO
-//? (document.docunetElement) = selecciona <html> 
-//? getPropretyValue()= toma como argumento el nombre de la propiedad CSS de la cual deseas obtener el valor.
-//? cada representa un color = #ee3d8f
-const colorPleno = [
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris')
-]
-const colorLiviano = [
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro')
-]
 
 
 
