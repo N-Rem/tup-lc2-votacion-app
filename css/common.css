@@ -35,10 +35,12 @@
 }
 
 .escondido{ /* clase que esconde divs*/
+  display: none; 
   visibility: hidden;
   position: absolute;
   width:0;
   height: 0;
+  opacity: 0;
 }
 
 * {
@@ -263,6 +265,8 @@ select{
     -o-transition: all 1s ease;
     transition:  all 1s ease;
     z-index: 10000;
+    opacity: 0;
+
 }
 
 #cargando{
@@ -272,6 +276,8 @@ select{
     height: 100px;
     width: 100px;
     border-radius: 100%;
+    position: fixed;
+    z-index: 10000;
 
     position: absolute;
     top:0px;
