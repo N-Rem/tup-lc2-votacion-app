@@ -1,5 +1,4 @@
 import { provinciasSVG } from "./mapas.js";
-
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 const getResultados = "https://resultados.mininterior.gob.ar/api/resultados/getResultados"
@@ -32,10 +31,10 @@ let eleccion_JSON = {} //? se gusra el json en una variable gloval
 let filtrado_JSON = {}
 
 //*Guardamos los datos a medida que se van filtrando en estas Variables
-let periodosSelect = "" //? año seleciconad
-let cargoSelect = "" //? ID de cargo para ir filtrando
-let distritoSelect = "" //? ID de distrito para ir filtrando
-let seccionSeleccionadaID = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
+let anioElegido = "" //? año seleciconad
+let cargoId = "" //? ID de cargo para ir filtrando
+let distritoId = "" //? ID de distrito para ir filtrando
+let seccionId = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
 const tipoEleccion = 1; //? tipo 1 eleccion PASOS
 const tipoRecuento = 1;
@@ -129,16 +128,15 @@ async function seleccionAnio() {
 
 // ------------CARGO-----------
 async function seleccionCargo() {
-  periodosSelect = $selectAnio.value //?Ya se selecciona para el filtro final..
+  anioElegido = $selectAnio.value //?Ya se selecciona para el filtro final..
   try {
     mostrarSpiner()
     console.log(" ----INICIA el TRY ASYNC DE seleccionCargo---- ")
 
-    const respuesta = await fetch(cargoURL + periodosSelect);
+    const respuesta = await fetch(cargoURL + anioElegido);
     if (respuesta.ok) {
       ocultarSpiner()
-      borrarTodosLosHijos()
-      eleccion_JSON = await respuesta.json(); //! Se agrega a la constante global<----------------------
+      eleccion_JSON = await respuesta.json(); //! Se agrega a la variable global<----------------------
       console.log("----Json, año para elecciones----")
       console.log(eleccion_JSON)
 
@@ -168,13 +166,13 @@ async function seleccionCargo() {
 //-------------Distrito con fun---------------------
 function seleccionDistrito() {
   console.log(" ----INICIA el FUN DE seleccionDistrito---- ")
-  cargoSelect = $selectCargo.value //?se guarda el cargo elegido anteriormente
+  cargoId = $selectCargo.value //?se guarda el cargo elegido anteriormente
   borrarHijos($selectDistrito)
   borrarHijos($seccionSelect)
   eleccion_JSON.forEach((eleccion) => {
     if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
       eleccion.Cargos.forEach((cargo) => { //se recorre el array de cargos
-        if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+        if (cargo.IdCargo == cargoId) { //? Se selecciona el cargo anteriormente seleccionado.
           valorCargo = `${cargo.Cargo}` //? Se guarda el nombre del cargo para imprimirlo
 
           console.log("----Json Cargo para Distrito----")
@@ -196,15 +194,15 @@ function seleccionDistrito() {
 //-------------Seccion Provincial con fun---------------
 function seleccionSeccionProv() {
   console.log(" ----INICIA LA FUN de seleccionSeccionProv---- ")
-  distritoSelect = $selectDistrito.value
+  distritoId = $selectDistrito.value
   borrarHijos($seccionSelect)
 
   eleccion_JSON.forEach((eleccion) => {
     if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
       eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
-        if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+        if (cargo.IdCargo == cargoId) { //? Se selecciona el cargo anteriormente seleccionado.
           cargo.Distritos.forEach((distrito) => {
-            if (distrito.IdDistrito == distritoSelect) {
+            if (distrito.IdDistrito == distritoId) {
               valorDistrito = `${distrito.Distrito}`
               console.log("----Json Distrito para SeccionProv----")
               console.log(distrito)
@@ -234,19 +232,18 @@ function seleccionSeccionProv() {
 //!!-----------Filtrar-------------
 async function filtrar() {
   idSeccionProv = $seccionSelect.value
-  seccionSeleccionadaID = $inputSeccionProvincial.value
-  let idCircuito = "";
-  let IdMesa = "";
+  seccionId = $inputSeccionProvincial.value
 
-  if (periodosSelect === "" || cargoSelect === "" || distritoSelect === "" || idSeccionProv === "") {
+  if (anioElegido === "" || cargoId === "" || distritoId === "" || idSeccionProv === "") {
     mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-  let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
+  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${idSeccionProv}&seccionId=${seccionId}&circuitoId=&mesaId=`
   let url = getResultados + parametros
   console.log(url);
-  let p = `ANIO ${periodosSelect} - TIPO RECUENTO ${tipoRecuento} - TIPO ELECCION ${tipoEleccion}CARGO ${cargoSelect} DISTRITO ${distritoSelect} SEC PROV${seccionSeleccionadaID} idSECCION PROV ${idSeccionProv} - VACIO ${idCircuito} - VACIO ${IdMesa}`
+  
+  let p = `ANIO ${anioElegido} - TIPO RECUENTO ${tipoRecuento} - TIPO ELECCION ${tipoEleccion}CARGO ${cargoId} DISTRITO ${distritoId} SEC PROV${seccionId} idSECCION PROV ${idSeccionProv}`
   console.log(p)
   try {
     mostrarSpiner()
@@ -258,8 +255,8 @@ async function filtrar() {
       mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
 
       //?se agrega titulo y subtitulo--
-      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | ${valorTipoEleccion}`
-      let subTitulo = `${periodosSelect} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
+      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${anioElegido} | ${valorTipoEleccion}`
+      let subTitulo = `${anioElegido} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
       $tituloSubTitulo.querySelector("p").textContent = subTitulo
 
       //?--Guardado en variables globales
@@ -298,20 +295,19 @@ function buscaMapa(nombreProvincia) {
   return ProvEncontrado.svg
 }
 
-//!!------------Agragar Comentarios----------
 function agregarAInforme() {
-  let nuevaCadenaValores = `${periodosSelect}, ${valorTipoEleccion}, ${valorCargo}, ${valorDistrito}, ${valorSeccion}, ${valorSvg}, ${valorCantidadElectores}, ${valorMesasTotalizadas}, ${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento}, ${tipoEleccion}, ${cargoId}, ${distritoId}, ${idSeccionProv}, ${seccionId}, ${""}, ${""}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
-  if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor para la key, entonces no entra en el if.
-    listaInforme = JSON.parse(localStorage.getItem('INFORMES'));//? Si key tiene algo, se guarda en informes lo que hay dentro de INFORMES. El parse si no me equivoco lo hace obj
+  if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.
+    listaInforme = JSON.parse(localStorage.getItem('INFORMES'));//? Si key tiene algo, se saca todo lo que esta dentro del localStroage(informes) y se lo guarda en listaInfrome
   }
 
   if (listaInforme.includes(nuevaCadenaValores)) { //?retorna true si el array contiene el elemento especificado y false si no lo contiene.
     mostrarMensaje($msjAmarilloAdver, "El informe ya se encuentra añadido.");
-  } else {
+  } else { //? si la nueva cadena no esta en listaInforme se la agrega al array
     listaInforme.push(nuevaCadenaValores);
-    localStorage.setItem('INFORMES', JSON.stringify(listaInforme));
+    localStorage.setItem('INFORMES', JSON.stringify(listaInforme)); //? y se la agrega a un nuevo item llamado informes
     mostrarMensaje($msjVerdeExito, "Informe agregado con exito");
   }
 }
@@ -348,10 +344,10 @@ function borrarTodosLosHijos() {
   borrarHijos($seccionSelect)
 }
 function resetFiltro() {
-  periodosSelect = ""
-  cargoSelect = ""
-  distritoSelect = ""
-  seccionSeleccionadaID = ""
+  anioElegido = ""
+  cargoId = ""
+  distritoId = ""
+  seccionId = ""
   idSeccionProv = ""
 }
 
@@ -380,7 +376,8 @@ function ocultarSpiner(tiempo = 1000) {
 //*--Parte dos --- 
 
 function agregaCuadrosAgrupaciones(){
-  return 0; //dx
+  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos
+  
 }
 
 
