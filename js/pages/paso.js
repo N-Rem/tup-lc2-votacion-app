@@ -419,7 +419,7 @@ function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-//!!-----------Filtrar error 409-------------
+//!!-----------Filtrar hay error 409-------------
 async function filtrar() {
   // idSeccionProv = $inputSeccionProvincial.value
   idSeccionProv = "";
@@ -490,12 +490,12 @@ function buscaMapa(nombreProvincia) {
 }
 
 function agregarAInforme() {
-  if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
-    mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
-    console.log(anioElegido + " " + cargoId + " " + distritoId + " " + idSeccionProv)
-    return;
-  }
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento}, ${tipoEleccion}, ${cargoId}, ${distritoId}, ${idSeccionProv}, ${seccionId}, ${""}, ${""}`//? Crea la lista de todosl lso valores filtrados.
+  // if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
+  //   mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
+  //   console.log(anioElegido + " " + cargoId + " " + distritoId + " " + seccionId)
+  //   return;
+  // }
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.

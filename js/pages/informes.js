@@ -5,6 +5,9 @@ const $msjAmarilloAdver = document.getElementById("adver")
 const $spiner = document.querySelector("#spiner")
 const $seccionContenido = document.querySelector("#sec-contenido");
 
+let datosLocalStorage = JSON.parse(localStorage.getItem(`INFORMES`))
+console.log(datosLocalStorage)
+
 //?valores del localStorage()
 let valorSvgMapa = ""
 let valorTitulo = ""
@@ -16,6 +19,7 @@ let valorSeccion=""
 let mesasEscrutadas = ""
 let electorales = ""
 let participacion = ""
+let filtroUrlJson = ""
 
 //!!porIndice
 let valorPartido=""
@@ -25,6 +29,15 @@ let valroVotosDePartidos=""
 let partidos = [{nombre: "nomb del partido", porcentaje: "25%", votosDePartidos: "2000"},{}]
 
 
+// let valorCargo = ""
+// let valorDistrito = ""
+// let valorSeccion = ""
+// let valorTipoEleccion = ""
+// let valorSvg = ""
+// let valorCantidadElectores = ""
+// let valorMesasTotalizadas = ""
+// let valorParticipacionPorcentaje = ""
+
 //-------Secion Targejta------
 //Mapa-porvicioa-svg = svg-Mapa
 //seccion-Eleccion = titulo/subtitulo   anio>generales>porvisoiro>senadoers>naciones>bsas
@@ -32,15 +45,22 @@ let partidos = [{nombre: "nomb del partido", porcentaje: "25%", votosDePartidos:
 //Datos por Agrupaicón = class="tabla-agrupacion"
 
 //*------Start--------
+// !! se oculta todo y asta que no se cargue la pagina se deja el sipiner
+
+
+//!! hay que llamar a la api para volver a extraer los datos
+
+
+
 $seccionContenido.classList.add("escondido")
-mostrarSpiner()
 document.addEventListener('DOMContentLoaded', () => {
+        mostrarSpiner()
     if (localStorage.getItem("INFORMES") === null) {
-        ocultarSpiner(200)
-        console.log("no hay nada guardado en le localStorage")
+        ocultarSpiner(100)
+        console.log("No hay nada guardado en le localStorage")
         mostrarMensaje($msjAmarilloAdver, `Debe AGREGAR INFORMES en Pasos o Generales`)
     } else {
-        console.log(`Hay algo guardado en el localStorage.\n${localStorage.getItem(INFORMES)}`)
+        console.log(`Hay algo guardado en el localStorage.\n${datosLocalStorage}`)
         //!! Deberia agregar una fucnion que valla creando las targentas con la info del localStroage()
 
     }
