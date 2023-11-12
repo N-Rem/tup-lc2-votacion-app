@@ -215,6 +215,7 @@ select{
   padding: 5px;
   color: var(--celeste);
   font-weight: bold;
+  overflow: hidden;
 }
 
 .texto-path{
@@ -235,7 +236,20 @@ select{
   padding-top: 10px;
   padding-bottom: 10px;
   /* margin-left: 5px; */
+}
+
+/* !!!Para que no se desborden el menu */
+.barra-menu li{
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barra-menu select,
+.barra-menu option {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
  main{
@@ -258,7 +272,6 @@ select{
 
 .barra-menu li{
   margin-left: 5px;
-  overflow: hidden;
 }  
 
 /* -----------SPINER----------------- */

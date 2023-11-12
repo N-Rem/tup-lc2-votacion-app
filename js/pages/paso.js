@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 console.log(prueba_JSON)
 agregaCuadrosAgrupaciones(prueba_JSON)
 agregarResumenVotos(prueba_JSON)
-
+//!!------------->
 $btnAgregarInforme.addEventListener("click", agregarAInforme);
 $botonFiltrar.addEventListener('click', filtrar);
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
@@ -465,7 +465,6 @@ async function filtrar() {
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
-      //!Resumen de votos---
       agregarResumenVotos(filtrado_JSON)
 
 
@@ -491,6 +490,11 @@ function buscaMapa(nombreProvincia) {
 }
 
 function agregarAInforme() {
+  if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
+    mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
+    console.log(anioElegido + " " + cargoId + " " + distritoId + " " + idSeccionProv)
+    return;
+  }
   let nuevaCadenaValores = `${anioElegido},${tipoRecuento}, ${tipoEleccion}, ${cargoId}, ${distritoId}, ${idSeccionProv}, ${seccionId}, ${""}, ${""}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
@@ -633,5 +637,4 @@ function agregarResumenVotos(json){
   </div>`
   cadenaInnerhtml = cadenaInicial + barras + cadenaFinal
   $divResumenVotos.innerHTML = cadenaInnerhtml
-
 }
