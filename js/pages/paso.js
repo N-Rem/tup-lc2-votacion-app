@@ -53,8 +53,8 @@ let valorParticipacionPorcentaje = ""
 //? (document.docunetElement) = selecciona <html> 
 //? getPropretyValue()= toma como argumento el nombre de la propiedad CSS de la cual deseas obtener el valor.
 //? cada representa un color = #ee3d8f
-const colorPleno = ['--grafica-amarillo','--grafica-celeste','--grafica-bordo','--grafica-lila','--grafica-lila2','--grafica-verde','--grafica-gris']
-const colorLiviano = ['--grafica-amarillo-claro','--grafica-celeste-claro','--grafica-bordo-claro','--grafica-lila-claro','--grafica-lila2-claro','--grafica-verde-claro','--grafica-gris-claro']
+const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
+const colorLiviano = ['--grafica-amarillo-claro', '--grafica-celeste-claro', '--grafica-bordo-claro', '--grafica-lila-claro', '--grafica-lila2-claro', '--grafica-verde-claro', '--grafica-gris-claro']
 
 reconoceTipoElecion()
 //*---------------Start-----------------------
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
 $selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la fun
-$selectCargo.addEventListener('change', seleccionDistrito); 
-$selectDistrito.addEventListener('change', seleccionSeccionProv); 
+$selectCargo.addEventListener('change', seleccionDistrito);
+$selectDistrito.addEventListener('change', seleccionSeccionProv);
 $seccionSelect.addEventListener('change', seleccionCargo);
 $seccionSelect.addEventListener('change', () => {
   let opcionSeleccionada = $seccionSelect.options[$seccionSelect.selectedIndex];
@@ -216,18 +216,19 @@ function seleccionSeccionProv() {
 
 //!!-----------Filtrar-------------
 async function filtrar() {
-  idSeccionProv = $seccionSelect.value
-  seccionId = $inputSeccionProvincial.value
+  idSeccionProv = $inputSeccionProvincial.value
+  seccionId = $seccionSelect.value
 
-  if (anioElegido === "" || cargoId === "" || distritoId === "" || idSeccionProv === "") {
+  if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
     mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
+    console.log(anioElegido + " " + cargoId + " " + distritoId + " " + idSeccionProv)
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${idSeccionProv}&seccionId=${seccionId}&circuitoId=&mesaId=`
+  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${seccionId}&seccionId=${idSeccionProv}&circuitoId=&mesaId=`
   let url = getResultados + parametros
   console.log(url);
-  
+
   let p = `ANIO ${anioElegido} - TIPO RECUENTO ${tipoRecuento} - TIPO ELECCION ${tipoEleccion}CARGO ${cargoId} DISTRITO ${distritoId} SEC PROV${seccionId} idSECCION PROV ${idSeccionProv}`
   console.log(p)
   try {
@@ -256,7 +257,7 @@ async function filtrar() {
       $spanSobreRecuento.textContent = valorParticipacionPorcentaje
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
       //!agregar cuadro de agrup poli
-      agregaCuadrosAgrupaciones()
+      // agregaCuadrosAgrupaciones()
       //!y Resumen de votos ---2 cosas---
       //?--Agrega valores a la: <section id="cuadros"
 
@@ -362,55 +363,66 @@ function ocultarSpiner(tiempo = 1000) {
 
 //*--Parte dos --- 
 
-function agregaCuadrosAgrupaciones(){
-  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos.sort((a,b)=>b.votos - a.votos);
-  if(agrupaciones){ //?si agrupaciones no es null se crea agrupaciones
-    agrupaciones.forEach((agrupacion)=>{
+function agregaCuadrosAgrupaciones() {
+  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
+  let idColor = -1;
+  let cadenaInnerhtml = ""
+  let listaNomb = ""
+  let listaNum = ""
+  let listaVoto = ""
+  let cadenaInicial = `<div class="cuadro-Agrupaciones-centrado">
+  <div class="Agrupacion">`
+  let cadenaIterada = ``
+  if (agrupaciones) { //?si agrupaciones no es null se crea agrupaciones
+    agrupaciones.forEach((agrupacion) => {
+      if (idColor < 7){
+        idColor++
+      }
+      let indColor = idColor
+      let tituloAgrupacion = agrupacion.nombreAgrupacion
+      cadenaTitulo = `<p>${tituloAgrupacion}</p>`
+      let partidos = agrupacion.listas
+      partidos.forEach((partido) => {
+        let nombre = partido.nombre
+        let porcentajeVotos = (parseFloat(partido.votos * 100) / parseFloat(agrupacion.votos))
+        let votos = ` ${partido.votos} votos`
+        cadenaPartidos = `<p>JUNTOS</p>
+        <div class="progress" style="background: var(--grafica-amarillo-claro);">
+            <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
+                <span class="progress-bar-text">75%</span>
+            </div>
+        </div>`
+        })
+      })
+      let cadenaFinal = `</div>
+      </div>`
+      cadenaInnerhtml = cadenaInicial + cadenaIterada + cadenaFinal;
 
-      $divAgrupaciones.innerHTML = `<div id="agrupaciones" class="cuadro-Agrupaciones">
-      <p>Agrupaciones Politicas</p>
-      <div class="cuadro-Agrupaciones-centrado">
-          <div></div>
-          <div class="Agrupacion">
-              <p>JUNTOS POR EL CAMBIO</p>
-              <p>JUNTOS</p>
-                  <div class="progress" style="background: var(--grafica-amarillo-claro);">
-                      <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
-                          <span class="progress-bar-text">75%</span>
-                      </div>
-                  </div>
-              <p>PJ</p>
-              <div class="progress" style="background: var(--grafica-amarillo-claro);">
-                  <div class="progress-bar" style="width:15%; background: var(--grafica-amarillo);">
-                      <span class="progress-bar-text">15%</span>
-                  </div>
-              </div>
-          </div>
-          <div class="Agrupacion">
-              <p>ECO + VAMOS CORRIENTES</p>
-              <p>VERDE</p>
-              <div class="progress" style="background: var(--grafica-verde-claro);">
-                  <div class="progress-bar" style="width:75%; background: var(--grafica-verde-claro);">
-                      <span class="progress-bar-text">75%</span>
-                  </div>
-              </div> 
-              <p>EC</p>
-              <div class="progress" style="background: var(--grafica-verde-claro);">
-                  <div class="progress-bar" style="width:15%; background: var(--grafica-verde-claro);">
-                      <span class="progress-bar-text">15%</span>
-                  </div>
-              </div>
-          </div>
-      </div> 
-    </div>`
-    })
-    }
 
+    $divAgrupaciones.innerHTML = cadenaInnerhtml
   }
 
+}
 
 
 
+` <div class="cuadro-Agrupaciones-centrado">
+<div class="Agrupacion">
+
+
+    <p>JUNTOS POR EL CAMBIO</p>
+
+
+    <p>JUNTOS</p>
+        <div class="progress" style="background: var(--grafica-amarillo-claro);">
+            <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
+                <span class="progress-bar-text">75%</span>
+            </div>
+        </div>
+
+
+</div>
+</div>`
 
 
 
