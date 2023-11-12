@@ -66,10 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarMensaje($msjAmarilloAdver, `Debe AGREGAR INFORMES en Pasos o Generales`)
     } else {
         informes.forEach((informe)=>{
-            url = creaURL(informe)
+            let url = creaURL(informe)
+            let resultadosJSON = consultarResultados(url)
+
             //se mete la url y el infomre[i] en una funcion para que cree las tarjetas
         })
         ocultarSpiner(100)
+        $seccionContenido.classList.remove("escondido")
+
     }
 });
 
@@ -81,7 +85,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+async function consultarResultados(url) {
+    try {
+        mostrarSpiner()
+        let respuesta = await fetch(url);
+        
+        if (respuesta.ok) {
+            ocultarSpiner()
+            console.log(resultadosJSON)
+            resulJSON = await respuesta.json();
+            return resulJSON
 
+        } else {
+            mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+        }
+    }
+    catch (error) {
+        mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+        console.log(error)
+    }
+}
 
 
 function creaURL(informe){
@@ -104,20 +127,11 @@ function creaURL(informe){
 }
 
 
-function reconoceTipoElecion(tipo) {
-    if (tipoEleccion === tipo) {
-        valorTipoEleccion = "Pasos"
-    }
-    else {
-        valorTipoEleccion = "Generales"
-    }
-}
-
 function mostrarSpiner() {
     $spiner.classList.remove("escondido")
     $spiner.style.opacity = "1";
 }
-function ocultarSpiner(tiempo = 2000) {
+function ocultarSpiner(tiempo = 200) {
     setTimeout(() => {
         $spiner.style.opacity = "0";
         $spiner.addEventListener("transitionend", () => {
