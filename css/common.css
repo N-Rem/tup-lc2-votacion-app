@@ -117,6 +117,10 @@ a{
 #svg-mapa svg{
   transform: scale(2);
 }
+.agranda-resumen{
+  transform: scale(1.2);
+
+}
 .barra-menu ul{
   display: flex;
   flex-direction: row; 

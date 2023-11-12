@@ -2,7 +2,212 @@ import { provinciasSVG } from "./mapas.js";
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 const getResultados = "https://resultados.mininterior.gob.ar/api/resultados/getResultados"
+////----------------------------
+let cadena_JSON = `{
+  "fechaTotalizacion": "2023-04-27T01:24:24.825Z",
+  "estadoRecuento": {
+      "mesasEsperadas": 0,
+      "mesasTotalizadas": 1,
+      "mesasTotalizadasPorcentaje": 0,
+      "cantidadElectores": 347,
+      "cantidadVotantes": 255,
+      "participacionPorcentaje": 73.49
+  },
+  "valoresTotalizadosPositivos": [
+      {
+          "idAgrupacion": "01-502",
+          "nombreAgrupacion": "FRENTE DE TODOS",
+          "votos": 90,
+          "votosPorcentaje": 35.29,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "CELESTE Y BLANCA",
+                  "numero": "A",
+                  "votos": 90
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "87",
+          "nombreAgrupacion": "UNITE POR LA LIBERTAD Y LA DIGNIDAD",
+          "votos": 13,
+          "votosPorcentaje": 5.1,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "OLA CELESTE",
+                  "numero": "A",
+                  "votos": 13
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-501",
+          "nombreAgrupacion": "FRENTE DE IZQUIERDA Y DE TRABAJADORES - UNIDAD",
+          "votos": 13,
+          "votosPorcentaje": 5.1,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "UNIDAD",
+                  "numero": "A",
+                  "votos": 13
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-504",
+          "nombreAgrupacion": "CONSENSO FEDERAL",
+          "votos": 17,
+          "votosPorcentaje": 6.67,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "CONSENSO PARA EL FUTURO",
+                  "numero": "A",
+                  "votos": 17
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-262",
+          "nombreAgrupacion": "EL MOVIMIENTO",
+          "votos": 0,
+          "votosPorcentaje": 0,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "CELESTE",
+                  "numero": "A",
+                  "votos": 0
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-503",
+          "nombreAgrupacion": "JUNTOS POR EL CAMBIO",
+          "votos": 96,
+          "votosPorcentaje": 37.65,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "JUNTOS SOMOS EL CAMBIO",
+                  "numero": "A",
+                  "votos": 96
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "13",
+          "nombreAgrupacion": "MOVIMIENTO AL SOCIALISMO",
+          "votos": 2,
+          "votosPorcentaje": 0.78,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "UNIDAD DE LA IZQUIERDA",
+                  "numero": "A",
+                  "votos": 2
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "5",
+          "nombreAgrupacion": "DEMOCRATA CRISTIANO",
+          "votos": 3,
+          "votosPorcentaje": 1.18,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "CIUDAD CELESTE POR LA VIDA Y LA FAMILIA",
+                  "numero": "A",
+                  "votos": 3
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "86",
+          "nombreAgrupacion": "FRENTE RENOVADOR AUTENTICO",
+          "votos": 0,
+          "votosPorcentaje": 0,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "NUEVA CORRIENTE",
+                  "numero": "A",
+                  "votos": 0
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "88",
+          "nombreAgrupacion": "PARTIDO DIGNIDAD POPULAR",
+          "votos": 0,
+          "votosPorcentaje": 0,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "LIBERACION",
+                  "numero": "1A",
+                  "votos": 0
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-187",
+          "nombreAgrupacion": "AUTODETERMINACION Y LIBERTAD",
+          "votos": 4,
+          "votosPorcentaje": 1.57,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "QUE LOS PUEBLOS MANDEN",
+                  "numero": "A",
+                  "votos": 4
+              }
+          ]
+      },
+      {
+          "idAgrupacion": "01-343",
+          "nombreAgrupacion": "MOVIMIENTO DE JUBILADOS Y JUVENTUD",
+          "votos": 0,
+          "votosPorcentaje": 0,
+          "idAgrupacionTelegrama": "",
+          "urlLogo": "",
+          "listas": [
+              {
+                  "nombre": "MISION CELESTE",
+                  "numero": "A",
+                  "votos": 0
+              }
+          ]
+      }
+  ],
+  "valoresTotalizadosOtros": {
+      "votosNulos": 2,
+      "votosNulosPorcentaje": 0.78,
+      "votosEnBlanco": 15,
+      "votosEnBlancoPorcentaje": 5.88,
+      "votosRecurridosComandoImpugnados": 0,
+      "votosRecurridosComandoImpugnadosPorcentaje": 0
+  }
+}`
 
+let prueba_JSON = JSON.parse(cadena_JSON);
+
+////---------------------------
 //Se usa el $ para poder distingir con mayor facilidad los elementos directos del DOM
 const $selectAnio = document.getElementById("anio");
 const $selectCargo = document.getElementById("cargo");
@@ -20,7 +225,7 @@ const $btnAgregarInforme = document.querySelector("#agregar-informe")
 const $spiner = document.querySelector("#spiner")
 
 const $divAgrupaciones = document.querySelector("#agrupaciones")
-
+const $divResumenVotos = document.querySelector("#resumen-barras")
 //*span a cambiar con filtro().
 const $spanMesasComputadas = document.getElementById("mesas-computadas-porsen")
 const $spanElectores = document.getElementById("electores")
@@ -49,10 +254,6 @@ let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
 
 //---------------Colores---------------
-//? getComputedStyle = devuelve los estilos/style que el navegador ha calculado COMO OBJETO
-//? (document.docunetElement) = selecciona <html> 
-//? getPropretyValue()= toma como argumento el nombre de la propiedad CSS de la cual deseas obtener el valor.
-//? cada representa un color = #ee3d8f
 const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
 const colorLiviano = ['--grafica-amarillo-claro', '--grafica-celeste-claro', '--grafica-bordo-claro', '--grafica-lila-claro', '--grafica-lila2-claro', '--grafica-verde-claro', '--grafica-gris-claro']
 
@@ -60,10 +261,14 @@ reconoceTipoElecion()
 //*---------------Start-----------------------
 document.addEventListener('DOMContentLoaded', () => {
   mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`)
-
-  $botonFiltrar.addEventListener('click', filtrar);
-  $btnAgregarInforme.addEventListener("click", agregarAInforme);
 });
+//!!---prueba--
+console.log(prueba_JSON)
+agregaCuadrosAgrupaciones(prueba_JSON)
+agregarResumenVotos(prueba_JSON)
+
+$btnAgregarInforme.addEventListener("click", agregarAInforme);
+$botonFiltrar.addEventListener('click', filtrar);
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
 $selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la fun
 $selectCargo.addEventListener('change', seleccionDistrito);
@@ -91,7 +296,7 @@ async function seleccionAnio() {
       console.log("----Json, Año para Cargo----")
       console.log(anios)
 
-      anios.forEach((anio) => { //?se recorre todo el json()
+      anios.forEach((anio) => { //?se recorre todo el json
         const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto (en este caso el año)
         nuevaOption.value = anio;
         nuevaOption.innerHTML = ` ${anio}`;
@@ -214,9 +419,10 @@ function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-//!!-----------Filtrar-------------
+//!!-----------Filtrar error 409-------------
 async function filtrar() {
-  idSeccionProv = $inputSeccionProvincial.value
+  // idSeccionProv = $inputSeccionProvincial.value
+  idSeccionProv = "";
   seccionId = $seccionSelect.value
 
   if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
@@ -225,13 +431,14 @@ async function filtrar() {
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${idSeccionProv}&seccionId=${seccionId}&circuitoId=&mesaId=`
-  let url = getResultados + parametros
-  console.log(url);
-
-  let p = `ANIO ${anioElegido} - TIPO RECUENTO ${tipoRecuento} - TIPO ELECCION ${tipoEleccion}CARGO ${cargoId} DISTRITO ${distritoId} SEC PROV${seccionId} idSECCION PROV ${idSeccionProv}`
-  console.log(p)
   try {
+    let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${idSeccionProv}&seccionId=${seccionId}&circuitoId=&mesaId=`
+    let url = getResultados + parametros
+    console.log(url);
+
+    let p = `ANIO =  ${anioElegido} - TIPO RECUENTO = ${tipoRecuento} - TIPO ELECCION =  ${tipoEleccion} - CARGO = ${cargoId} - DISTRITO = ${distritoId} - Seccion Provincial ID = ${idSeccionProv} - Sesscon ID = ${seccionId} `
+    console.log(p)
+
     mostrarSpiner()
     const respuesta = await fetch(url)
     if (respuesta.ok) {
@@ -256,10 +463,10 @@ async function filtrar() {
       $spanMesasComputadas.textContent = valorMesasTotalizadas
       $spanSobreRecuento.textContent = valorParticipacionPorcentaje
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
-      //!agregar cuadro de agrup poli
-      // agregaCuadrosAgrupaciones()
-      //!y Resumen de votos ---2 cosas---
-      //?--Agrega valores a la: <section id="cuadros"
+      
+      agregaCuadrosAgrupaciones(filtrado_JSON)
+      //!Resumen de votos---
+      agregarResumenVotos(filtrado_JSON)
 
 
 
@@ -363,66 +570,87 @@ function ocultarSpiner(tiempo = 1000) {
 
 //*--Parte dos --- 
 
-function agregaCuadrosAgrupaciones() {
-  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
+function agregaCuadrosAgrupaciones(json) {  //!!se cambia el json filtrado por uno de prueba por el erro 409 que no logro solucionar. (filtrado_JSON -> prueba_JSON )
+  let agrupaciones = json.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);  //!ordena de mayor a menor
   let idColor = -1;
   let cadenaInnerhtml = ""
-  let listaNomb = ""
-  let listaNum = ""
-  let listaVoto = ""
   let cadenaInicial = `<div class="cuadro-Agrupaciones-centrado">
   <div class="Agrupacion">`
+
   let cadenaIterada = ``
   if (agrupaciones) { //?si agrupaciones no es null se crea agrupaciones
     agrupaciones.forEach((agrupacion) => {
-      if (idColor < 7){
-        idColor++
+      if (idColor < 6) {
+        idColor += 1
       }
+
       let indColor = idColor
       let tituloAgrupacion = agrupacion.nombreAgrupacion
-      cadenaTitulo = `<p>${tituloAgrupacion}</p>`
+      let cadenaTitulo = `<h6>${tituloAgrupacion}</h6><hl>`;
       let partidos = agrupacion.listas
+      let cadenaPartidos = ""
+
       partidos.forEach((partido) => {
         let nombre = partido.nombre
         let porcentajeVotos = (parseFloat(partido.votos * 100) / parseFloat(agrupacion.votos))
-        let votos = ` ${partido.votos} votos`
-        cadenaPartidos = `<p>JUNTOS</p>
-        <div class="progress" style="background: var(--grafica-amarillo-claro);">
-            <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
-                <span class="progress-bar-text">75%</span>
+        let votos = ` <small>${partido.votos} votos</small>`
+
+        cadenaPartidos += `<p>${nombre} <span>${votos}</span></p>
+        <div class="progress" style="background: var(${colorLiviano[indColor]});">
+            <div class="progress-bar" style="width:${partido.votos}%; background: var(${colorPleno[indColor]});">
+                <span class="progress-bar-text">${partido.votos}%</span>
             </div>
         </div>`
-        })
       })
-      let cadenaFinal = `</div>
+      cadenaIterada += cadenaTitulo + cadenaPartidos
+    })
+
+    let cadenaFinal = `</div>
       </div>`
-      cadenaInnerhtml = cadenaInicial + cadenaIterada + cadenaFinal;
 
-
+    cadenaInnerhtml = cadenaInicial + cadenaIterada + cadenaFinal;
+    $divAgrupaciones.innerHTML = ``
     $divAgrupaciones.innerHTML = cadenaInnerhtml
   }
 
 }
 
+function agregarResumenVotos(json){
+  $divResumenVotos.innerHTML = ``
+  let agrupaciones = json.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);  //!ordena de mayor a menor
+  let barras = ``
+  let cadenaInnerhtml = ""
+  let cont = 0
+  let cadenaInicial = `<div class="chart-wrap horizontal">
+  <div class="grid">`
+  agrupaciones.forEach((agrupacion)=>{
+    if(cont < 7){
+      barras += `<div class="bar" id="partido-${cont}" style="--bar-value:${agrupacion.votosPorcentaje}%;" data-name="${agrupacion.nombreAgrupacion}" ></div>
+    `}
+    cont++
+  })
+  let cadenaFinal = `</div>
+  </div>`
+  cadenaInnerhtml = cadenaInicial + barras + cadenaFinal
+  $divResumenVotos.innerHTML = cadenaInnerhtml
+
+}
 
 
-` <div class="cuadro-Agrupaciones-centrado">
-<div class="Agrupacion">
+  // <div class="chart-wrap horizontal">
+  //     <div class="grid">
+  //         <div class="bar" id="partido-uno" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog 85%"></div>
+  //         <div class="bar" id="partido-dos" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
+  //         <div class="bar" id="partido-tres" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
+  //         <div class="bar" id="partido-cuatro" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
+  //         <div class="bar" id="partido-cinco" style="--bar-value:35%;" data-name="Partido 5" title="YouTube 35%"></div>
+  //         <div class="bar" id="partido-seis" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
+  //         <div class="bar"id="partido-siete" id="partido-uno" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
+  //         <div class="bar" id="otros" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
+  //     </div>
+  // </div>
 
 
-    <p>JUNTOS POR EL CAMBIO</p>
-
-
-    <p>JUNTOS</p>
-        <div class="progress" style="background: var(--grafica-amarillo-claro);">
-            <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
-                <span class="progress-bar-text">75%</span>
-            </div>
-        </div>
-
-
-</div>
-</div>`
 
 
 
