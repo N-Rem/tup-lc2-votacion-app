@@ -225,7 +225,7 @@ async function filtrar() {
     $tituloSubTitulo.classList.remove("escondido");
     return;
   }
-  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${seccionId}&seccionId=${idSeccionProv}&circuitoId=&mesaId=`
+  let parametros = `?anioEleccion=${anioElegido}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoId}&distritoId=${distritoId}&seccionProvincialId=${idSeccionProv}&seccionId=${seccionId}&circuitoId=&mesaId=`
   let url = getResultados + parametros
   console.log(url);
 
