@@ -264,13 +264,16 @@ button:hover {
   opacity: 0.7;
 }
 
+/*!!!! Cabia el tamaño del data-name */
 .chart-wrap .bar::after {
   content: attr(data-name);
   margin-left: 100%;
-  padding: 10px;
+  padding: 5px;
   display: inline-block;
   white-space: nowrap;
+  font-size: 5px;
 }
+
 #partido-uno{
   background-color: var(--grafica-amarillo);
 }

@@ -625,7 +625,7 @@ function agregarResumenVotos(json){
   <div class="grid">`
   agrupaciones.forEach((agrupacion)=>{
     if(cont < 7){
-      barras += `<div class="bar" id="partido-${cont}" style="--bar-value:${agrupacion.votosPorcentaje}%;" data-name="${agrupacion.nombreAgrupacion}" ></div>
+      barras += `<div class="bar" id="partido-${cont}" style="--bar-value:${parseFloat(agrupacion.votosPorcentaje)*2}%;background-color: var(${colorPleno[cont]});" data-name="${agrupacion.nombreAgrupacion}";></div>
     `}
     cont++
   })
@@ -635,22 +635,3 @@ function agregarResumenVotos(json){
   $divResumenVotos.innerHTML = cadenaInnerhtml
 
 }
-
-
-  // <div class="chart-wrap horizontal">
-  //     <div class="grid">
-  //         <div class="bar" id="partido-uno" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog 85%"></div>
-  //         <div class="bar" id="partido-dos" style="--bar-value:23%;" data-name="Partido 2" title="Medium 23%"></div>
-  //         <div class="bar" id="partido-tres" style="--bar-value:7%;" data-name="Partido 3" title="Tumblr 7%"></div>
-  //         <div class="bar" id="partido-cuatro" style="--bar-value:38%;" data-name="Partido 4" title="Facebook 38%"></div>
-  //         <div class="bar" id="partido-cinco" style="--bar-value:35%;" data-name="Partido 5" title="YouTube 35%"></div>
-  //         <div class="bar" id="partido-seis" style="--bar-value:30%;" data-name="Partido 6" title="LinkedIn 30%"></div>
-  //         <div class="bar"id="partido-siete" id="partido-uno" style="--bar-value:5%;" data-name="Partido 7" title="Twitter 5%"></div>
-  //         <div class="bar" id="otros" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
-  //     </div>
-  // </div>
-
-
-
-
-
