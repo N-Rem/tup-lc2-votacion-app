@@ -19,6 +19,7 @@ const $contenido = document.querySelector("#sec-contenido")
 const $btnAgregarInforme = document.querySelector("#agregar-informe")
 const $spiner = document.querySelector("#spiner")
 
+const $divAgrupaciones = document.querySelector("#agrupaciones")
 
 //*span a cambiar con filtro().
 const $spanMesasComputadas = document.getElementById("mesas-computadas-porsen")
@@ -52,24 +53,8 @@ let valorParticipacionPorcentaje = ""
 //? (document.docunetElement) = selecciona <html> 
 //? getPropretyValue()= toma como argumento el nombre de la propiedad CSS de la cual deseas obtener el valor.
 //? cada representa un color = #ee3d8f
-const colorPleno = [
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris')
-]
-const colorLiviano = [
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-amarillo-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-celeste-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-bordo-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-lila2-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-verde-claro'),
-  getComputedStyle(document.documentElement).getPropertyValue('--grafica-gris-claro')
-]
+const colorPleno = ['--grafica-amarillo','--grafica-celeste','--grafica-bordo','--grafica-lila','--grafica-lila2','--grafica-verde','--grafica-gris']
+const colorLiviano = ['--grafica-amarillo-claro','--grafica-celeste-claro','--grafica-bordo-claro','--grafica-lila-claro','--grafica-lila2-claro','--grafica-verde-claro','--grafica-gris-claro']
 
 reconoceTipoElecion()
 //*---------------Start-----------------------
@@ -270,7 +255,9 @@ async function filtrar() {
       $spanMesasComputadas.textContent = valorMesasTotalizadas
       $spanSobreRecuento.textContent = valorParticipacionPorcentaje
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
-      //!agregar cuadro de agrup poli y Resumen de votos ---2 cosas---
+      //!agregar cuadro de agrup poli
+      agregaCuadrosAgrupaciones()
+      //!y Resumen de votos ---2 cosas---
       //?--Agrega valores a la: <section id="cuadros"
 
 
@@ -376,9 +363,50 @@ function ocultarSpiner(tiempo = 1000) {
 //*--Parte dos --- 
 
 function agregaCuadrosAgrupaciones(){
-  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos
-  
-}
+  let agrupaciones = filtrado_JSON.valoresTotalizadosPositivos.sort((a,b)=>b.votos - a.votos);
+  if(agrupaciones){ //?si agrupaciones no es null se crea agrupaciones
+    agrupaciones.forEach((agrupacion)=>{
+
+      $divAgrupaciones.innerHTML = `<div id="agrupaciones" class="cuadro-Agrupaciones">
+      <p>Agrupaciones Politicas</p>
+      <div class="cuadro-Agrupaciones-centrado">
+          <div></div>
+          <div class="Agrupacion">
+              <p>JUNTOS POR EL CAMBIO</p>
+              <p>JUNTOS</p>
+                  <div class="progress" style="background: var(--grafica-amarillo-claro);">
+                      <div class="progress-bar" style="width:75%; background: var(--grafica-amarillo);">
+                          <span class="progress-bar-text">75%</span>
+                      </div>
+                  </div>
+              <p>PJ</p>
+              <div class="progress" style="background: var(--grafica-amarillo-claro);">
+                  <div class="progress-bar" style="width:15%; background: var(--grafica-amarillo);">
+                      <span class="progress-bar-text">15%</span>
+                  </div>
+              </div>
+          </div>
+          <div class="Agrupacion">
+              <p>ECO + VAMOS CORRIENTES</p>
+              <p>VERDE</p>
+              <div class="progress" style="background: var(--grafica-verde-claro);">
+                  <div class="progress-bar" style="width:75%; background: var(--grafica-verde-claro);">
+                      <span class="progress-bar-text">75%</span>
+                  </div>
+              </div> 
+              <p>EC</p>
+              <div class="progress" style="background: var(--grafica-verde-claro);">
+                  <div class="progress-bar" style="width:15%; background: var(--grafica-verde-claro);">
+                      <span class="progress-bar-text">15%</span>
+                  </div>
+              </div>
+          </div>
+      </div> 
+    </div>`
+    })
+    }
+
+  }
 
 
 
