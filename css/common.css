@@ -45,6 +45,12 @@
   opacity: 0;
 }
 
+.div-scrol{
+  max-width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 * {
   font-family: 'Roboto', sans-serif;
 
@@ -117,10 +123,10 @@ a{
 }
 
 #svg-mapa svg{
-  transform: scale(2);
+  transform: scale(1.5);
 }
 .agranda-resumen{
-  transform: scale(1.2);
+  transform: scale(1.7);
 
 }
 .barra-menu ul{

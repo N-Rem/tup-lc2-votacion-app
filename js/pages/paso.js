@@ -252,9 +252,6 @@ let valorSvg = ""
 let valorCantidadElectores = ""
 let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
-let valorNombAgrupacionFiltrado = ``
-let valorVotosPorcenFiltrado = ``
-let  valorVotosFiltrado = ``
 
 //---------------Colores---------------
 const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
@@ -448,19 +445,18 @@ async function filtrar() {
       ocultarSpiner(200)
       filtrado_JSON = await respuesta.json()
       console.log(filtrado_JSON);
-      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
-
+      
       //?se agrega titulo y subtitulo--
       $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${anioElegido} | ${valorTipoEleccion}`
       let subTitulo = `${anioElegido} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
       $tituloSubTitulo.querySelector("p").textContent = subTitulo
-
+      
       //?--Guardado en variables globales
       valorCantidadElectores = filtrado_JSON.estadoRecuento.cantidadElectores
       valorMesasTotalizadas = filtrado_JSON.estadoRecuento.mesasTotalizadas
       valorParticipacionPorcentaje = filtrado_JSON.estadoRecuento.participacionPorcentaje
       valorSvg = buscaMapa(valorDistrito)
-
+      
       //?--Agrega valores a la: <section id="sec-contenido"
       $spanElectores.textContent = valorCantidadElectores
       $spanMesasComputadas.textContent = valorMesasTotalizadas
@@ -469,8 +465,9 @@ async function filtrar() {
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
       agregarResumenVotos(filtrado_JSON)
-
-
+      
+      
+      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
       mostrarTodo()
     }
     else {

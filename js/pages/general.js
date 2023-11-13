@@ -242,7 +242,7 @@ let cargoId = "" //? ID de cargo para ir filtrando
 let distritoId = "" //? ID de distrito para ir filtrando
 let seccionId = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
-const tipoEleccion = 2; //? tipo 2 eleccion GENERALES
+const tipoEleccion = 2; //? tipo 2 eleccion GENERAL
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
@@ -448,19 +448,18 @@ async function filtrar() {
       ocultarSpiner(200)
       filtrado_JSON = await respuesta.json()
       console.log(filtrado_JSON);
-      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
-
+      
       //?se agrega titulo y subtitulo--
       $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${anioElegido} | ${valorTipoEleccion}`
       let subTitulo = `${anioElegido} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
       $tituloSubTitulo.querySelector("p").textContent = subTitulo
-
+      
       //?--Guardado en variables globales
       valorCantidadElectores = filtrado_JSON.estadoRecuento.cantidadElectores
       valorMesasTotalizadas = filtrado_JSON.estadoRecuento.mesasTotalizadas
       valorParticipacionPorcentaje = filtrado_JSON.estadoRecuento.participacionPorcentaje
       valorSvg = buscaMapa(valorDistrito)
-
+      
       //?--Agrega valores a la: <section id="sec-contenido"
       $spanElectores.textContent = valorCantidadElectores
       $spanMesasComputadas.textContent = valorMesasTotalizadas
@@ -469,8 +468,9 @@ async function filtrar() {
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
       agregarResumenVotos(filtrado_JSON)
-
-
+      
+      
+      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
       mostrarTodo()
     }
     else {

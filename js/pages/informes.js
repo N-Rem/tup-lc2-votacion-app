@@ -10,7 +10,7 @@ const $tarjetaTBody = document.querySelector("#tarjeta")
 //?--Datos localStorage
 let informes = JSON.parse(localStorage.getItem(`INFORMES`))
 console.log(informes)
-
+let resultadosJSON = {}
 
 //?---------
 
@@ -21,7 +21,7 @@ console.log(informes)
 
 mostrarSpiner()
 $seccionContenido.classList.add("escondido")
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     if (localStorage.getItem("INFORMES") === null) {
         ocultarSpiner(100)
         console.log("No hay nada guardado en le localStorage")
@@ -29,60 +29,61 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
 
         let cadenaTarjetaHtml = ``
-        informes.forEach((informe) => {
-            // let url = creaURL(informe)
-            // let resultadosJSON = devolverJson(url)
-            // console.log(resultadosJSON)
+        for (let informe of informes) {
 
-            cadenaTarjetaHtml += creaTarjeta(informe)
-        })
+            let url = creaURL(informe)
+            resultadosJSON = await devolverJson(url)
+
+            cadenaTarjetaHtml += creaTarjeta(informe, resultadosJSON)
+        }
+        console.log(resultadosJSON)//!!!!!!!!!??????????????????????
+
         ocultarSpiner(100)
         $tarjetaTBody.innerHTML = ``
-        let cadenaHtmlFinal = cadenaTarjetaHtml ;
+        let cadenaHtmlFinal = cadenaTarjetaHtml;
         $tarjetaTBody.innerHTML = cadenaHtmlFinal;
         $seccionContenido.classList.remove("escondido")
     }
 });
 
-// async function devolverJson(url) {
-//     try {
-//         mostrarSpiner()
-//         let respuesta = await fetch(url);
 
-//         if (respuesta.ok) {
-//             ocultarSpiner()
-//             console.log(resultadosJSON)
-//             resulJSON = await respuesta.json();
-//             return resulJSON
+async function devolverJson(url) {
+    try {
+        mostrarSpiner()
+        let respuesta = await fetch(url);
 
-//         } else {
-//             mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
-//         }
-//     }
-//     catch (error) {
-//         mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
-//         console.log(error)
-//     }
-// }
+        if (respuesta.ok) {
+            ocultarSpiner()
+            resultadosJSON = await respuesta.json();
+            return resultadosJSON
+        } else {
+            mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+        }
+    }
+    catch (error) {
+        mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+        console.log(error)
+    }
+}
 
-// function creaURL(informe) {
-//     let datos = informe.split(',');
+function creaURL(informe) {
+    let datos = informe.split(',');
 
-//     let anio = datos[0];
-//     let tipoRecuento = datos[1];
-//     let tipoEleccion = datos[2];
-//     let categoriaId = datos[3];
-//     let distritoId = datos[4];
-//     let seccionProvincialId = datos[5];
-//     let seccionId = datos[6];
-//     let circuitoId = datos[7];
-//     let mesaId = datos[8];
+    let anio = datos[0];
+    let tipoRecuento = datos[1];
+    let tipoEleccion = datos[2];
+    let categoriaId = datos[3];
+    let distritoId = datos[4];
+    let seccionProvincialId = datos[5];
+    let seccionId = datos[6];
+    let circuitoId = datos[7];
+    let mesaId = datos[8];
 
-//     let getResultados = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`
-//     let parametros = `?anioEleccion=${anio}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${categoriaId}&distritoId=${distritoId}&seccionProvincialId=${seccionProvincialId}&seccionId=${seccionId}&circuitoId=${circuitoId}&mesaId=${mesaId}`
-//     let url = getResultados + parametros
-//     return url;
-// }
+    let getResultados = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`
+    let parametros = `?anioEleccion=${anio}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${categoriaId}&distritoId=${distritoId}&seccionProvincialId=${seccionProvincialId}&seccionId=${seccionId}&circuitoId=${circuitoId}&mesaId=${mesaId}`
+    let url = getResultados + parametros
+    return url;
+}
 
 
 function mostrarSpiner() {
@@ -106,7 +107,10 @@ function mostrarMensaje(msj, cadena, tiempo = 4000) {
     }, tiempo);
 }
 
-function creaTarjeta(informe) {
+function creaTarjeta(informe, json) {
+    console.log("JSON")
+    console.log(json)
+    let agrupaciones = json.valoresTotalizadosPositivos
     let datos = informe.split(',');
     let anio = datos[0];
     let valorCargo = datos[9]
@@ -117,9 +121,7 @@ function creaTarjeta(informe) {
     let valorCantidadElectores = datos[14]
     let valorMesasTotalizadas = datos[15]
     let valorParticipacionPorcentaje = datos[16]
-    let nombreAgrupacion = datos[17]
-    let votosPorcentaje = datos[18]
-    let votosVotos = datos[19]
+
 
     let cadenaInicial = "<tr>"
     let cadenaFinal = "</tr>"
@@ -318,16 +320,23 @@ C184.178,409.323,186.501,406.999,189.368,406.999z"></path>
     </div>
 </td>`
 
-    let tdparteFinal = `<td >   
-         <div class="oredenar-table">
-             <div class="tabla-agrupacion">
-                 <p >${nombreAgrupacion}</p>
-                 <p class="tabla-por">%${votosPorcentaje}%<br/>${votosVotos} votos</p>
-             </div>
-         </div>
+    let tdparteFinalUno = `<td >   
+     <div class="oredenar-table div-scrol">`
+    let tdparteFinalDos = ``
+    agrupaciones.forEach((agrupacion) => {
+        let nombreAgrupacion = agrupacion.nombreAgrupacion
+        let votosPorcentaje = agrupacion.votosPorcentaje
+        let votosVotos = agrupacion.votos
+
+        tdparteFinalDos += ` <div class="tabla-agrupacion"><p >${nombreAgrupacion}</p>
+                 <p class="tabla-por">%${votosPorcentaje}%<br/>${votosVotos} votos</p></div>`
+
+    })
+
+    let tdparteFinalTres = ` </div>
          </td>`
 
-    return cadenaInicial + tdMapa + tdTitulSub + tdBotoneColores + tdparteFinal + cadenaFinal
+    return cadenaInicial + tdMapa + tdTitulSub + tdBotoneColores + tdparteFinalUno + tdparteFinalDos + tdparteFinalTres + cadenaFinal
 
 }
 
