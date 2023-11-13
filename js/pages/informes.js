@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let cadenaTarjetaHtml = ``
         informes.forEach((informe) => {
-            let url = creaURL(informe)
+            // let url = creaURL(informe)
             // let resultadosJSON = devolverJson(url)
             // console.log(resultadosJSON)
 
@@ -44,45 +44,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-async function devolverJson(url) {
-    try {
-        mostrarSpiner()
-        let respuesta = await fetch(url);
+// async function devolverJson(url) {
+//     try {
+//         mostrarSpiner()
+//         let respuesta = await fetch(url);
 
-        if (respuesta.ok) {
-            ocultarSpiner()
-            console.log(resultadosJSON)
-            resulJSON = await respuesta.json();
-            return resulJSON
+//         if (respuesta.ok) {
+//             ocultarSpiner()
+//             console.log(resultadosJSON)
+//             resulJSON = await respuesta.json();
+//             return resulJSON
 
-        } else {
-            mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
-        }
-    }
-    catch (error) {
-        mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
-        console.log(error)
-    }
-}
+//         } else {
+//             mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+//         }
+//     }
+//     catch (error) {
+//         mostrarMensaje($msjRojoError, "Error.. Intente mas tarde.")
+//         console.log(error)
+//     }
+// }
 
-function creaURL(informe) {
-    let datos = informe.split(',');
+// function creaURL(informe) {
+//     let datos = informe.split(',');
 
-    let anio = datos[0];
-    let tipoRecuento = datos[1];
-    let tipoEleccion = datos[2];
-    let categoriaId = datos[3];
-    let distritoId = datos[4];
-    let seccionProvincialId = datos[5];
-    let seccionId = datos[6];
-    let circuitoId = datos[7];
-    let mesaId = datos[8];
+//     let anio = datos[0];
+//     let tipoRecuento = datos[1];
+//     let tipoEleccion = datos[2];
+//     let categoriaId = datos[3];
+//     let distritoId = datos[4];
+//     let seccionProvincialId = datos[5];
+//     let seccionId = datos[6];
+//     let circuitoId = datos[7];
+//     let mesaId = datos[8];
 
-    let getResultados = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`
-    let parametros = `?anioEleccion=${anio}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${categoriaId}&distritoId=${distritoId}&seccionProvincialId=${seccionProvincialId}&seccionId=${seccionId}&circuitoId=${circuitoId}&mesaId=${mesaId}`
-    let url = getResultados + parametros
-    return url;
-}
+//     let getResultados = `https://resultados.mininterior.gob.ar/api/resultados/getResultados`
+//     let parametros = `?anioEleccion=${anio}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${categoriaId}&distritoId=${distritoId}&seccionProvincialId=${seccionProvincialId}&seccionId=${seccionId}&circuitoId=${circuitoId}&mesaId=${mesaId}`
+//     let url = getResultados + parametros
+//     return url;
+// }
+
 
 function mostrarSpiner() {
     $spiner.classList.remove("escondido")
@@ -321,7 +322,7 @@ C184.178,409.323,186.501,406.999,189.368,406.999z"></path>
          <div class="oredenar-table">
              <div class="tabla-agrupacion">
                  <p >${nombreAgrupacion}</p>
-                 <p class="tabla-por">%${votosPorcentaje}%<br/>${votos} votos</p>
+                 <p class="tabla-por">%${votosPorcentaje}%<br/>${votosVotos} votos</p>
              </div>
          </div>
          </td>`
