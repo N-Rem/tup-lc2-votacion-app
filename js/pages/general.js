@@ -264,8 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 //!!---prueba--
 // console.log(prueba_JSON)
-agregaCuadrosAgrupaciones(filtrado_JSON)
-agregarResumenVotos(filtrado_JSON)
+// agregaCuadrosAgrupaciones(filtrado_JSON)
+// agregarResumenVotos(filtrado_JSON)
 //!!------------->
 $btnAgregarInforme.addEventListener("click", agregarAInforme);
 $botonFiltrar.addEventListener('click', filtrar);
