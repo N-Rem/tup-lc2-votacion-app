@@ -14,45 +14,6 @@ console.log(informes)
 
 //?---------
 
-
-//?valores del localStorage()
-// let valorSvgMapa = ""
-// let valorTitulo = ""
-// let valorAnio = ""
-// let valorTipoEleccion = ""
-// let valorCago =""
-// let valorDistrito=""
-// let valorSeccion=""
-// let mesasEscrutadas = ""
-// let electorales = ""
-// let participacion = ""
-// let filtroUrlJson = ""
-
-//!!porIndice
-let valorPartido=""
-let valorVotosPorcentaje = ""
-let valroVotosDePartidos=""
-//! o como objeto. o puedo usar a los dos con un foreach()
-let partidos = [{nombre: "nomb del partido", porcentaje: "25%", votosDePartidos: "2000"},{}]
-
-
-// let valorCargo = ""
-// let valorDistrito = ""
-// let valorSeccion = ""
-// let valorTipoEleccion = ""
-// let valorSvg = ""
-// let valorCantidadElectores = ""
-// let valorMesasTotalizadas = ""
-// let valorParticipacionPorcentaje = ""
-
-//-------Secion Targejta------
-//Mapa-porvicioa-svg = svg-Mapa
-//seccion-Eleccion = titulo/subtitulo   anio>generales>porvisoiro>senadoers>naciones>bsas
-//Datos-Generales = mesas estructuadas / Electorales / Participación sobre Escrutado
-//Datos por Agrupaicón = class="tabla-agrupacion"
-
-console.log(informes)
-
 //*------Start--------
 
 //!! hay que llamar a la api para volver a extraer los datos
