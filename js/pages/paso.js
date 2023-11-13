@@ -263,9 +263,9 @@ document.addEventListener('DOMContentLoaded', () => {
   mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`)
 });
 //!!---prueba--
-console.log(prueba_JSON)
-agregaCuadrosAgrupaciones(prueba_JSON)
-agregarResumenVotos(prueba_JSON)
+// console.log(prueba_JSON)
+agregaCuadrosAgrupaciones(filtrado_JSON)
+agregarResumenVotos(filtrado_JSON)
 //!!------------->
 $btnAgregarInforme.addEventListener("click", agregarAInforme);
 $botonFiltrar.addEventListener('click', filtrar);
@@ -624,7 +624,7 @@ function agregaCuadrosAgrupaciones(json) {  //!!se cambia el json filtrado por u
 
 }
 
-function agregarResumenVotos(json){
+function agregarResumenVotos(json){ //!!se cambia el json (prueba_JSON -> filtrado_JSON)
   $divResumenVotos.innerHTML = ``
   let agrupaciones = json.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);  //!ordena de mayor a menor
   let barras = ``
