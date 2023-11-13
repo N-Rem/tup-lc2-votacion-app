@@ -242,7 +242,7 @@ let cargoId = "" //? ID de cargo para ir filtrando
 let distritoId = "" //? ID de distrito para ir filtrando
 let seccionId = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
-const tipoEleccion = 2; //? tipo 2 eleccion Generales
+const tipoEleccion = 2; //? tipo 2 eleccion Generel
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
@@ -419,7 +419,7 @@ function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-//!!-----------Filtrar error 409-------------
+//!!-----------Filtrar hay error 409-------------
 async function filtrar() {
   // idSeccionProv = $inputSeccionProvincial.value
   idSeccionProv = "";
@@ -465,7 +465,6 @@ async function filtrar() {
       $spanMapaSvg.innerHTML = valorSvg //?cambia el svg
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
-      //!Resumen de votos---
       agregarResumenVotos(filtrado_JSON)
 
 
@@ -491,7 +490,17 @@ function buscaMapa(nombreProvincia) {
 }
 
 function agregarAInforme() {
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""}`//? Crea la lista de todosl lso valores filtrados.
+
+//   let valorCargo = ""
+// let valorDistrito = ""
+// let valorSeccion = ""
+// let valorTipoEleccion = ""
+// let valorSvg = ""
+// let valorCantidadElectores = ""
+// let valorMesasTotalizadas = ""
+// let valorParticipacionPorcentaje = ""
+
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.

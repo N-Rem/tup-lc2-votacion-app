@@ -490,12 +490,17 @@ function buscaMapa(nombreProvincia) {
 }
 
 function agregarAInforme() {
-  // if (anioElegido === "" || cargoId === "" || distritoId === "" || seccionId === "") {
-  //   mostrarMensaje($msjAmarilloAdver, "Por favor seleccione todos los campos requeridos.");
-  //   console.log(anioElegido + " " + cargoId + " " + distritoId + " " + seccionId)
-  //   return;
-  // }
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""}`//? Crea la lista de todosl lso valores filtrados.
+
+//   let valorCargo = ""
+// let valorDistrito = ""
+// let valorSeccion = ""
+// let valorTipoEleccion = ""
+// let valorSvg = ""
+// let valorCantidadElectores = ""
+// let valorMesasTotalizadas = ""
+// let valorParticipacionPorcentaje = ""
+
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.
