@@ -242,7 +242,7 @@ let cargoId = "" //? ID de cargo para ir filtrando
 let distritoId = "" //? ID de distrito para ir filtrando
 let seccionId = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
-const tipoEleccion = 2; //? tipo 1 eleccion GENERALES
+const tipoEleccion = 2; //? tipo 2 eleccion GENERALES
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
@@ -469,9 +469,6 @@ async function filtrar() {
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
       agregarResumenVotos(filtrado_JSON)
-      valorNombAgrupacionFiltrado =  filtrado_JSON.nombreAgrupacion
-      valorVotosPorcenFiltrado = filtrado_JSON.votosPorcentaje
-      valorVotosFiltrado = filtrado_JSON.votos
 
 
       mostrarTodo()
@@ -603,6 +600,10 @@ function agregaCuadrosAgrupaciones(json) {  //!!se cambia el json filtrado por u
       let cadenaTitulo = `<h6>${tituloAgrupacion}</h6><hl>`;
       let partidos = agrupacion.listas
       let cadenaPartidos = ""
+      
+      valorNombAgrupacionFiltrado =  agrupacion.nombreAgrupacion
+      valorVotosPorcenFiltrado = agrupacion.votosPorcentaje
+      valorVotosFiltrado = agrupacion.votos
 
       partidos.forEach((partido) => {
         let nombre = partido.nombre
