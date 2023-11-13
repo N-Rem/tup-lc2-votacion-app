@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
 :root {
@@ -35,6 +34,16 @@
 --mensaje-usuario-rojo: #dc3545;
 }
 
+/*?? clase que esconde divs */ 
+
+ /* .escondido{  
+  display: none; 
+  visibility: hidden;
+  position: absolute;
+  width:0;
+  height: 0;
+  opacity: 0;
+} */
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -49,6 +58,7 @@ body {
   padding: 0;
   background-color: rgb(240, 240, 240);/*white*/
   width:100%;
+  /* height: 100%; */
   flex: 1;
 }
 
@@ -103,14 +113,20 @@ a{
   background-color: var(--fondo-Menu);
   width:100%;
   height: 40px;
+  overflow: hidden;
 }
 
+#svg-mapa svg{
+  transform: scale(2);
+}
+.agranda-resumen{
+  transform: scale(1.2);
+
+}
 .barra-menu ul{
   display: flex;
   flex-direction: row; 
   align-items: center;
-  
-  
 }
 
 footer{
@@ -122,11 +138,13 @@ footer{
   padding-right: 150px;
   padding-top: 30px;
   padding-bottom: 30px ;
+  height: 100%;
 }
 footer{
   height: auto;
   box-sizing:content-box;
   flex: 1;
+  line-height: 1.7;
 }
 footer img{
   width:150px;
@@ -153,16 +171,12 @@ footer img{
 
 }
 
-
-
-#filtrar::before {
-  content: "🔍"; /* Puedes utilizar cualquier emoji o símbolo que desees */
-}
-
 #inicio{
   display: flex;
   background-color: var(--gris-claro);
   border-radius: 5px;
+  margin-right: 15px;
+
 }
 .active a,
 #inicio a{
@@ -175,11 +189,19 @@ footer img{
 
 ul,ol{
   list-style-type: none;
-
 }
 
 #btn-generales{
   background-color: var(--celeste);
+}
+#btn-generales a, #btn-paso a{
+  overflow: hidden;
+  padding:30px;
+  margin:0px;
+  border: 0px;
+}
+#btn-paso a{
+  margin: 15px;
 }
 #btn-paso{
   background-color: var(--magenta);
@@ -195,6 +217,7 @@ select{
   padding: 5px;
   color: var(--celeste);
   font-weight: bold;
+  overflow: hidden;
 }
 
 .texto-path{
@@ -205,28 +228,93 @@ select{
 
 .barra-menu h3{
   color:#fff;
+  overflow: hidden;
+
 }
 
 .barra-menu ul a{
-  padding-left: 40px;
-  padding-right: 40px ;
+  padding-left: 30px;
+  padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+}
+
+/* !!!Para que no se desborden el menu */
+.barra-menu li{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barra-menu select,
+.barra-menu option {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
  main{
-  flex: 2;
-  min-height: 77vh;
+
+  min-height: 70vh; 
+    height: 100%;  
 }
 .logo{
-  width: 200px;
+  width: 150px;
 }
 #informe{
   border: solid 1px #ffffff;
   border-radius: 15px;
+  width: 60px;
+}
+#informe a{
+  padding: 0px;
+  text-align: center;
 }
 
 .barra-menu li{
   margin-left: 5px;
+}  
+
+/* -----------SPINER----------------- */
+#spiner{
+    background-color: rgba(250,240,245,0.9);
+    height: 100%;
+    position: flex;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition:  all 1s ease;
+    z-index: 10000;
+    opacity: 0;
+
 }
+
+#cargando{
+    border: 15px solid #ededed;
+    border-top-color: #269bf4;
+    border-top-style: groove;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    position: fixed;
+    z-index: 10000;
+
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+        -o-animation:girar 1.5s linear infinite;
+        animation:girar 1.5s linear infinite;
+}
+
+@keyframes girar{
+    form{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+}
+
+
+
+

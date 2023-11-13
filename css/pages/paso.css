@@ -1,12 +1,27 @@
-@import "/css/common.css";
+@import "css/common.css";
 
-
+.barra-menu select {
+  /* Agrega o ajusta estilos según sea necesario */
+  max-width: 150px; /* Ajusta el ancho máximo deseado */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+.agregar-informe{
+  white-space: nowrap;
+  border: none;
+  width: 300px;
+}
 
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
-  gap: 15px;
+  gap: 0px;
+}
+#filtrar svg {
+  width: 12px;
+  height: 12px;
 }
 
 button {
@@ -39,17 +54,25 @@ button:hover {
 .mesa-comp,
 .electores,
 .escrutado {
-
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 40px 20px;
+  margin: 40px 10px;
   display: grid;
   grid-template-columns: auto auto;
+
+}
+
+.elecciones-paso{
+  margin-bottom: 0%;
+  padding-bottom: 0%;
 }
 /* _________________Fin Botones______________________ */
+#filtrar{
+  border-radius: 30px;
+}
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -71,8 +94,11 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  height: 70px;
 }
+
 #exito {
   background-color: var(--mensaje-usuario-verde);
 }
@@ -93,20 +119,22 @@ button:hover {
 /*----------------------------------------*/
 .cuadros {
   display: flex;
+  min-width: 350px; 
+  height: 400px;
 }
 .cuadro-Agrupaciones {
   flex: 2;
-  min-width: 350px; 
-  height: 350px;
+ 
+  height: 100%;
 }
 .cuadro-Mapa {
   justify-self: center;
-  min-width: 350px; 
+  height: 100%;
   flex: 1;
 }
 .cuadro-Resumen {
   flex: 2;
-  min-width: 350px;
+  height: 100%;
 }
 
 .cuadro-Agrupaciones,
@@ -114,7 +142,7 @@ button:hover {
 .cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px black;
+  box-shadow: 2px 2px 2px 1px var(--borde-Grilla);
   margin: 10px;
 }
 .cuadros p {
@@ -126,7 +154,9 @@ button:hover {
 
 .cuadro-Agrupaciones-centrado{
   overflow-y: scroll;
-  height: 290px;
+  height: 85%;
+
+
 }
 
 
@@ -149,7 +179,7 @@ button:hover {
 /* -------------------------barra de progreso*--------------------------------------------*/
 .progress {
   margin-left: 10px;
-  height: 35px;
+  height: 25px;
   width: 97%;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -251,13 +281,16 @@ button:hover {
   opacity: 0.7;
 }
 
+/*!!!! Cabia el tamaño del data-name */
 .chart-wrap .bar::after {
   content: attr(data-name);
   margin-left: 100%;
-  padding: 10px;
+  padding: 5px;
   display: inline-block;
   white-space: nowrap;
+  font-size: 5px;
 }
+
 #partido-uno{
   background-color: var(--grafica-amarillo);
 }
@@ -315,7 +348,11 @@ svg{
     flex: 2;
     
   }
+
+
 }
+
+
 /*----------------- cuadro-Resumen -----------------------*/
 
 .cuadro-Resumen-centrado{
@@ -339,5 +376,13 @@ svg{
   width: 100%;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+.cuadro-Mapa-centrado svg{
+  margin: auto;
 }
 /*----------------------------------------*/
+
+#cargo,#distrito,#seccion{
+  max-width:  200px;
+}

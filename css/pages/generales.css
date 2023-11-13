@@ -1,12 +1,28 @@
-@import "/css/common.css";
+@import "css/common.css";
 
-
+.barra-menu select {
+  /* Agrega o ajusta estilos según sea necesario */
+  max-width: 150px; /* Ajusta el ancho máximo deseado */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+.agregar-informe{
+  white-space: nowrap;
+  border: none;
+  width: 300px;
+}
+
+.elecciones-generales{
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+}
 
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
-  gap: 15px;
+  gap: 0px;
 }
 
 button {
@@ -45,9 +61,10 @@ button:hover {
   align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 40px 20px;
+  margin: 40px 10px;
   display: grid;
   grid-template-columns: auto auto;
+
 }
 /* _________________Fin Botones______________________ */
 /* Carteles para el usuario */
@@ -72,6 +89,8 @@ button:hover {
   flex-direction: row;
   justify-content: center;
   border-radius: 10px;
+  align-items: center;
+  height: 70px;
 }
 #exito {
   background-color: var(--mensaje-usuario-verde);
@@ -251,13 +270,16 @@ button:hover {
   opacity: 0.7;
 }
 
+/*!!!! Cabia el tamaño del data-name */
 .chart-wrap .bar::after {
   content: attr(data-name);
   margin-left: 100%;
-  padding: 10px;
+  padding: 5px;
   display: inline-block;
   white-space: nowrap;
+  font-size: 5px;
 }
+
 #partido-uno{
   background-color: var(--grafica-amarillo);
 }
@@ -328,6 +350,7 @@ svg{
 .cuadro-Mapa {
   display: flex; 
   flex-direction: column; 
+  overflow: hidden;
 }
 .cuadro-Mapa p{
   justify-content: center;

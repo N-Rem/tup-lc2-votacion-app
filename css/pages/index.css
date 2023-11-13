@@ -1,4 +1,7 @@
-@import "/css/common.css";
+ @import "css/common.css";
+body{
+  background-color: #fff;
+}
 .paso,
 .generales {
   border-radius: 5px;
@@ -79,4 +82,4 @@ main {
 span{
   display: flex;
   align-items: center;
-}
+} 
