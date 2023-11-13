@@ -242,7 +242,7 @@ let cargoId = "" //? ID de cargo para ir filtrando
 let distritoId = "" //? ID de distrito para ir filtrando
 let seccionId = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
 let idSeccionProv = "" //? ID de la Seccion provicial del Select para el filtrado
-const tipoEleccion = 2; //? tipo 2 eleccion Generel
+const tipoEleccion = 2; //? tipo 1 eleccion GENERALES
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
@@ -252,6 +252,9 @@ let valorSvg = ""
 let valorCantidadElectores = ""
 let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
+let valorNombAgrupacionFiltrado = ``
+let valorVotosPorcenFiltrado = ``
+let  valorVotosFiltrado = ``
 
 //---------------Colores---------------
 const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
@@ -264,8 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 //!!---prueba--
 // console.log(prueba_JSON)
-// agregaCuadrosAgrupaciones(filtrado_JSON)
-// agregarResumenVotos(filtrado_JSON)
+// agregaCuadrosAgrupaciones(prueba_JSON)
+// agregarResumenVotos(prueba_JSON)
 //!!------------->
 $btnAgregarInforme.addEventListener("click", agregarAInforme);
 $botonFiltrar.addEventListener('click', filtrar);
@@ -466,7 +469,9 @@ async function filtrar() {
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
       agregarResumenVotos(filtrado_JSON)
-
+      valorNombAgrupacionFiltrado =  filtrado_JSON.nombreAgrupacion
+      valorVotosPorcenFiltrado = filtrado_JSON.votosPorcentaje
+      valorVotosFiltrado = filtrado_JSON.votos
 
 
       mostrarTodo()
@@ -499,8 +504,8 @@ function agregarAInforme() {
 // let valorCantidadElectores = ""
 // let valorMesasTotalizadas = ""
 // let valorParticipacionPorcentaje = ""
-
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
+//!Se agrega tres datos mas al localstorage
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje},${valorNombAgrupacionFiltrado},${valorVotosPorcenFiltrado},${valorVotosFiltrado}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.

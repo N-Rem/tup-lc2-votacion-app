@@ -252,6 +252,9 @@ let valorSvg = ""
 let valorCantidadElectores = ""
 let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
+let valorNombAgrupacionFiltrado = ``
+let valorVotosPorcenFiltrado = ``
+let  valorVotosFiltrado = ``
 
 //---------------Colores---------------
 const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
@@ -466,7 +469,9 @@ async function filtrar() {
       
       agregaCuadrosAgrupaciones(filtrado_JSON)
       agregarResumenVotos(filtrado_JSON)
-
+      valorNombAgrupacionFiltrado =  filtrado_JSON.nombreAgrupacion
+      valorVotosPorcenFiltrado = filtrado_JSON.votosPorcentaje
+      valorVotosFiltrado = filtrado_JSON.votos
 
 
       mostrarTodo()
@@ -499,8 +504,8 @@ function agregarAInforme() {
 // let valorCantidadElectores = ""
 // let valorMesasTotalizadas = ""
 // let valorParticipacionPorcentaje = ""
-
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
+//!Se agrega tres datos mas al localstorage
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje},${valorNombAgrupacionFiltrado},${valorVotosPorcenFiltrado},${valorVotosFiltrado}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.

@@ -19,9 +19,9 @@ console.log(informes)
 //!! hay que llamar a la api para volver a extraer el JSON pero estoy haciendo todo a ciegas porque tengo ERROR 409.... 
 
 
+mostrarSpiner()
 $seccionContenido.classList.add("escondido")
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarSpiner()
     if (localStorage.getItem("INFORMES") === null) {
         ocultarSpiner(100)
         console.log("No hay nada guardado en le localStorage")
@@ -31,8 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let cadenaTarjetaHtml = ``
         informes.forEach((informe) => {
             let url = creaURL(informe)
-            let resultadosJSON = devolverJson(url)
-            cadenaTarjetaHtml += creaTarjeta(informe, resultadosJSON)
+            // let resultadosJSON = devolverJson(url)
+            // console.log(resultadosJSON)
+
+            cadenaTarjetaHtml += creaTarjeta(informe)
         })
         ocultarSpiner(100)
         $tarjetaTBody.innerHTML = ``
@@ -103,7 +105,7 @@ function mostrarMensaje(msj, cadena, tiempo = 4000) {
     }, tiempo);
 }
 
-function creaTarjeta(informe, infoJson) {
+function creaTarjeta(informe) {
     let datos = informe.split(',');
     let anio = datos[0];
     let valorCargo = datos[9]
@@ -114,6 +116,9 @@ function creaTarjeta(informe, infoJson) {
     let valorCantidadElectores = datos[14]
     let valorMesasTotalizadas = datos[15]
     let valorParticipacionPorcentaje = datos[16]
+    let nombreAgrupacion = datos[17]
+    let votosPorcentaje = datos[18]
+    let votosVotos = datos[19]
 
     let cadenaInicial = "<tr>"
     let cadenaFinal = "</tr>"
@@ -315,8 +320,8 @@ C184.178,409.323,186.501,406.999,189.368,406.999z"></path>
     let tdparteFinal = `<td >   
          <div class="oredenar-table">
              <div class="tabla-agrupacion">
-                 <p >${infoJson.nombreAgrupacion}</p>
-                 <p class="tabla-por">%${infoJson.votosPorcentaje}%<br/>${infoJson.votos} votos</p>
+                 <p >${nombreAgrupacion}</p>
+                 <p class="tabla-por">%${votosPorcentaje}%<br/>${votos} votos</p>
              </div>
          </div>
          </td>`
