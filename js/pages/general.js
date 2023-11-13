@@ -252,9 +252,6 @@ let valorSvg = ""
 let valorCantidadElectores = ""
 let valorMesasTotalizadas = ""
 let valorParticipacionPorcentaje = ""
-let valorNombAgrupacionFiltrado = ``
-let valorVotosPorcenFiltrado = ``
-let  valorVotosFiltrado = ``
 
 //---------------Colores---------------
 const colorPleno = ['--grafica-amarillo', '--grafica-celeste', '--grafica-bordo', '--grafica-lila', '--grafica-lila2', '--grafica-verde', '--grafica-gris']
@@ -470,7 +467,7 @@ async function filtrar() {
       agregarResumenVotos(filtrado_JSON)
       
       
-      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
+      mostrarMensaje($msjVerdeExito, "Se completo la busqueda")
       mostrarTodo()
     }
     else {

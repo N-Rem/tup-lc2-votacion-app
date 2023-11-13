@@ -467,7 +467,7 @@ async function filtrar() {
       agregarResumenVotos(filtrado_JSON)
       
       
-      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
+      mostrarMensaje($msjVerdeExito, "Se completo la busqueda.")
       mostrarTodo()
     }
     else {
