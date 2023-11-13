@@ -493,16 +493,8 @@ function buscaMapa(nombreProvincia) {
 
 function agregarAInforme() {
 
-//   let valorCargo = ""
-// let valorDistrito = ""
-// let valorSeccion = ""
-// let valorTipoEleccion = ""
-// let valorSvg = ""
-// let valorCantidadElectores = ""
-// let valorMesasTotalizadas = ""
-// let valorParticipacionPorcentaje = ""
 //!Se agrega tres datos mas al localstorage
-  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje},${valorNombAgrupacionFiltrado},${valorVotosPorcenFiltrado},${valorVotosFiltrado}`//? Crea la lista de todosl lso valores filtrados.
+  let nuevaCadenaValores = `${anioElegido},${tipoRecuento},${tipoEleccion},${cargoId},${distritoId},${idSeccionProv},${seccionId},${""},${""},${valorCargo},${valorDistrito},${valorSeccion},${valorTipoEleccion},${valorSvg},${valorCantidadElectores},${valorMesasTotalizadas},${valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
   let listaInforme = []
 
   if (localStorage.getItem('INFORMES')) {//? si debuelbe null es poque no hay ningun valor asociado la key, entonces no entra en el if.
@@ -600,10 +592,6 @@ function agregaCuadrosAgrupaciones(json) {  //!!se cambia el json filtrado por u
       let cadenaTitulo = `<h6>${tituloAgrupacion}</h6><hl>`;
       let partidos = agrupacion.listas
       let cadenaPartidos = ""
-      
-      valorNombAgrupacionFiltrado =  agrupacion.nombreAgrupacion
-      valorVotosPorcenFiltrado = agrupacion.votosPorcentaje
-      valorVotosFiltrado = agrupacion.votos
 
       partidos.forEach((partido) => {
         let nombre = partido.nombre
@@ -612,8 +600,8 @@ function agregaCuadrosAgrupaciones(json) {  //!!se cambia el json filtrado por u
 
         cadenaPartidos += `<p>${nombre} <span>${votos}</span></p>
         <div class="progress" style="background: var(${colorLiviano[indColor]});">
-            <div class="progress-bar" style="width:${partido.votos}%; background: var(${colorPleno[indColor]});">
-                <span class="progress-bar-text">${partido.votos}%</span>
+            <div class="progress-bar" style="width:${porcentajeVotos}%; background: var(${colorPleno[indColor]});">
+                <span class="progress-bar-text">${partido.votos}</span>
             </div>
         </div>`
       })
@@ -640,7 +628,7 @@ function agregarResumenVotos(json){ //!!se cambia el json (prueba_JSON -> filtra
   <div class="grid">`
   agrupaciones.forEach((agrupacion)=>{
     if(cont < 7){
-      barras += `<div class="bar" id="partido-${cont}" style="--bar-value:${parseFloat(agrupacion.votosPorcentaje)*2}%;background-color: var(${colorPleno[cont]});" data-name="${agrupacion.nombreAgrupacion}";></div>
+      barras += `<div class="bar" id="partido-${cont}" style="--bar-value:${parseFloat(agrupacion.votosPorcentaje)}%;background-color: var(${colorPleno[cont]});" data-name="${agrupacion.nombreAgrupacion}";></div>
     `}
     cont++
   })
